@@ -20,15 +20,20 @@ use App\Http\Controllers\PeminjamanController;
 
 
 Auth::routes(['register' => false]);
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
 //Data Pengguna
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/user', [UserController::class, 'index'])->name('user.index');  
 Route::get('/user/tambah', [UserController::class, 'create'])->name('user.create');  
 Route::post('/user', [UserController::class, 'store'])->name('user.store');  
 Route::get('/user/{user}/hapus', [UserController::class, 'destroy'])->name('user.delete');
 Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::patch('/user/{user}', [UserController::class, 'update'])->name('user.update');
+
+});
+
 //Data Lokasi
 Route::get('/lokasi', [LokasiController::class, 'index'])->name('lokasi.index');  
 Route::get('/lokasi/tambah', [LokasiController::class, 'create'])->name('lokasi.create');  

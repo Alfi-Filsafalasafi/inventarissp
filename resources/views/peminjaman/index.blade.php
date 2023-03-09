@@ -59,8 +59,8 @@
                     <tr>
                         <th>{{$loop->iteration}}</th>
                         <td>{{$peminjaman->nama_peminjam}}</td>
-                        <td>{{$peminjaman->nama_barang}}</td>
-                        <td>{{$peminjaman->lokasi_barang}}</td>
+                        <td>{{$peminjaman->nama_barang ?? 'Di hapus'}}</td>
+                        <td>{{$peminjaman->lokasi_barang ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->jumlah}}</td>
                         <td>{{$peminjaman->tgl_pinjam}}</td>
                         <td>{{$peminjaman->tgl_kembali}}</td>

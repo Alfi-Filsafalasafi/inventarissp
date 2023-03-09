@@ -20,18 +20,19 @@ class PeminjamanController extends Controller
     }
     public function create()
     {
-        $lokasi = DB::table('lokasis')->get();
+        $lokasi = DB::table('lokasis')->where('id', '!=', 0)->get();
         return view('peminjaman.tambah', ['lokasis' => $lokasi]);
     }
 
     public function getBarang(Request $request){
-        $barang = DB::table('barangs')->where('id_lokasi',$request->id_lokasi)->pluck('id','nama');
+        $barang = DB::table('barangs')->where('id_lokasi',$request->id_lokasi)->pluck('id','nama'); 
         return response()->json($barang);
     }
 
     public function edit($peminjaman){
         // dump($peminjaman);
-        $lokasi = DB::table('lokasis')->get();
+        $lokasi = DB::table('lokasis')->where('id', '!=', 0)->get();
+
         $peminjamans = DB::table('v_peminjaman')->where('id', $peminjaman)->first();
         return view('peminjaman.edit',['peminjamans' => $peminjamans, 'lokasis' => $lokasi]);
     }

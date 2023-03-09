@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lokasi;
+use App\Models\Barang;
+use Illuminate\Support\Facades\DB;
+
 
 
 class LokasiController extends Controller
@@ -14,7 +17,9 @@ class LokasiController extends Controller
     }
     public function index()
     {
-        $lokasi = Lokasi::all();
+        $pemin = Lokasi::all();
+        $lokasi = DB::table('v_jumlah_barang_lokasi')->get();
+        
         return view('lokasi.index', ['lokasis' => $lokasi]);
     }
     public function create()
@@ -38,8 +43,11 @@ class LokasiController extends Controller
 
     public function destroy(Lokasi $lokasi){
         //hapus file 
-        $lokasi->delete();
-        return redirect()->route('lokasi.index')->with('hapus',"hapus data $lokasi->nama berhasil");
+        $lokasi->delete(); 
+        $hapusbarangdilokasi = Barang::where('id_lokasi', $lokasi->id)->delete();
+        // dump($hapusbarangdilokasi);
+        // $hapusbarangdilokasi->delete();
+        return redirect()->route('lokasi.index')->with('hapus',"hapus data $lokasi->nama beserta barang di lokasinya berhasil");
 
     }
 

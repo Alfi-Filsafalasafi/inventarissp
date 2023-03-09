@@ -45,7 +45,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">{{$lokasi->nama}}</span>
-              <span class="info-box-number">0 <small>barang</small></span>
+              <span class="info-box-number" name="jumlah" id="jumlah"> {{$lokasi->jumlah_barang}} <small>Model Barang</small></span>
                 <span><a href="{{route('lokasi.edit',['lokasi'=>$lokasi->id])}}" class="btn btn-warning btn-xs" style="margin: 2px;"><i class="fa fa-edit"></i></a>
                 <a href="{{route('lokasi.delete',['lokasi'=>$lokasi->id])}}" class="btn btn-danger btn-xs" style="margin: 2px;"><i class="fa fa-trash"></i></a></span>
             </div>
@@ -54,7 +54,7 @@
           <!-- /.info-box -->
     </div>
     @empty
-    <td colspan="6" class="text-center">Tidak ada data...</td>
+    <center>Tidak ada Data</center>
     @endforelse
 </div>
 @endsection

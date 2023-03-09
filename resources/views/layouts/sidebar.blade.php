@@ -35,7 +35,7 @@
             </li>
         
             <li class="header">AKUN</li>
-            @if (auth()->user()->level == 'manajer')
+            @if (auth()->user()->level == 'admin')
             <li>
                 <a href="{{route('user.index')}}">
                     <i class="fa fa-money"></i> <span>Data Pengguna</span>
