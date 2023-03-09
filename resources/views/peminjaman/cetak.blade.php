@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>InventarisSP | Cetak Data Barang</title>
+  <title>InventarisSP | Cetak Data Peminjaman</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -52,7 +52,7 @@
       
       <!-- /.col -->
       <div class="col-sm-4 invoice-col">
-        <b>Lokasi  : </b>{{$lokasis->nama}}<br>
+        <b>Data Peminjaman</b> <br>
         <b>User pencetak : </b>{{ auth()->user()->name }} <br>
       </div>
       <!-- /.col -->
@@ -66,28 +66,43 @@
           <thead>
           <tr>
             <th>No</th>
-            <th>Nama</th>
-            <th>Spesifikasi</th>
-            <th>Kondisi</th>
+            <th>Nama Peminjaman</th>
+            <th>Barang</th>
+            <th>Lokasi</th>
             <th>Jumlah</th>
-            <th width="110">Tanggal Masuk</th>
-            <th>Foto</th>
+            <th>Tanggal Pinjam</th>
+            <th>Tanggal Kembali</th>
+            <th>Kondisi</th>
+            <th>Status</th>
+            <th>Pemberi</th>
           </tr>
           </thead>
           <tbody>
-          @forelse ($barangs as $barang)
+          @forelse ($peminjamans as $peminjaman)
                     <tr>
                         <th>{{$loop->iteration}}</th>
-                        <td>{{$barang->nama}}</td>
-                        <td>{{$barang->spesifikasi}}</td>
-                        <td>{{$barang->kondisi}}</td>
-                        <td>{{$barang->jumlah}}</td>
-                        <td>{{$barang->tgl_masuk}}</td>
-                        <td><img src="{{asset('/image/barang/'.$barang->foto)}}" alt="" srcset="" width="100"></td>
-                        </tr>
+                        <td>{{$peminjaman->nama_peminjam}}</td>
+                        <td>{{$peminjaman->nama_barang ?? 'Di hapus'}}</td>
+                        <td>{{$peminjaman->lokasi_barang ?? 'Di hapus'}}</td>
+                        <td>{{$peminjaman->jumlah}}</td>
+                        <td>{{$peminjaman->tgl_pinjam}}</td>
+                        <td>{{$peminjaman->tgl_kembali}}</td>
+                        <td>{{$peminjaman->kondisi}}</td>
+                        <td>
+                            @if($peminjaman->status == 'Di Kembalikan')
+                            <span class="label label-success">{{$peminjaman->status}}</span>
+                            @else
+                            <span class="label label-danger">{{$peminjaman->status}}</span>
+                            @endif
+                        </td>
+                        <td>{{$peminjaman->pemberi}}</td>
+                        
+                        
+                        
                     @empty
                     <td colspan="6" class="text-center">Tidak ada data...</td>
                     @endforelse
+                    </tr>
           </tbody>
         </table>
       </div>

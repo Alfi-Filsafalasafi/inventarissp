@@ -19,7 +19,7 @@ use App\Http\Controllers\PeminjamanController;
 
 
 
-Auth::routes(['register' => false]);
+Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
@@ -47,13 +47,14 @@ Route::get('/barang/{lokasi}/', [BarangController::class, 'index'])->name('baran
 Route::get('/barang/{lokasi}/tambah', [BarangController::class, 'create'])->name('barang.create');  
 Route::post('/barang/{lokasi}', [BarangController::class, 'store'])->name('barang.store');  
 Route::get('/barang/{barang}/hapus', [BarangController::class, 'destroy'])->name('barang.delete');
-Route::get('/barang/{barang}/edit', [BarangController::class, 'edit'])->name('barang.edit');
+Route::get('/barang/{barang}/edit/{lokasi}', [BarangController::class, 'edit'])->name('barang.edit');
 Route::patch('/barang/{barang}', [BarangController::class, 'update'])->name('barang.update');
 Route::get('/barang/{lokasi}/cetak', [BarangController::class, 'cetak'])->name('barang.cetak');
 
 
 //Data Peminjaman
 Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman.index');  
+Route::get('/peminjaman/cetak', [PeminjamanController::class, 'cetak'])->name('peminjaman.cetak');  
 Route::get('/peminjaman/tambah', [PeminjamanController::class, 'create'])->name('peminjaman.create');  
 Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');  
 Route::get('/peminjaman/{peminjaman}/hapus', [PeminjamanController::class, 'destroy'])->name('peminjaman.delete');

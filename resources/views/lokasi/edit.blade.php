@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Data Lokasi
+    Data Lokasi Barang
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Edit Data Lokasi</li>
+    <li class="active">Edit Data Lokasi Barang</li>
 @endsection
 
 @section('content')

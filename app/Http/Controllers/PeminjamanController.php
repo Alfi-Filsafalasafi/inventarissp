@@ -18,6 +18,11 @@ class PeminjamanController extends Controller
         $peminjamans = DB::table('v_peminjaman')->get();
         return view('peminjaman.index', ['peminjamans' => $peminjamans]);
     }
+    public function cetak()
+    {
+        $peminjamans = DB::table('v_peminjaman')->get();
+        return view('peminjaman.cetak', ['peminjamans' => $peminjamans]);
+    }
     public function create()
     {
         $lokasi = DB::table('lokasis')->where('id', '!=', 0)->get();

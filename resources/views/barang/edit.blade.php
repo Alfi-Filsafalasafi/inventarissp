@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Data User
+  Data Barang di Lokasi <b> {{$lokasi->nama}}</b>
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Edit Data User</li>
+    <li class="active">Edit Data Barang di Lokasi <b> {{$lokasi->nama}}</b></li>
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
           <!-- general form elements -->
           <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">Tambah</h3>
+              <h3 class="box-title">Edit</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -39,6 +39,18 @@
                             @error('spesifikasi')
                             <span class="help-block">{{$message}}</span>
                             @enderror
+                        </div>
+                        <div class="form-group @error('foto') has-error @enderror">
+                          <label for="exampleInputFile">Foto</label>
+                          <input type="file" name="foto" id="foto" value="{{old('foto')}}">
+                          <small>Kosongi jika tidak ingin merubah</small>
+                          @error('foto')
+                                    <span class="help-block">{{$message}}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                        <img id="preview-image-before-upload" src="{{asset('image/barang/'. $barang->foto)}}"
+                              alt="preview image" style="max-height: 150px;">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -63,21 +75,17 @@
                             <span class="help-block">{{$message}}</span>
                             @enderror
                         </div>
+                        <div class="form-group @error('date') has-error @enderror">
+                            <label for="exampleInputPassword1">Tanggal Masuk</label>
+                            <input type="date" name="date" value="{{old('date') ?? $barang->tgl_masuk}}" class="form-control" id="exampleInputPassword1" placeholder="Masukkan jumlah">
+                            @error('date')
+                            <span class="help-block">{{$message}}</span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
                   
-                <div class="form-group @error('foto') has-error @enderror">
-                  <label for="exampleInputFile">Foto</label>
-                  <input type="file" name="foto" id="foto" value="{{old('foto')}}">
-                  <small>Kosongi jika tidak ingin merubah</small>
-                  @error('foto')
-                            <span class="help-block">{{$message}}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                <img id="preview-image-before-upload" src="{{asset('image/barang/'. $barang->foto)}}"
-                      alt="preview image" style="max-height: 150px;">
-                </div>
+                
               </div>
               <!-- /.box-body -->
 

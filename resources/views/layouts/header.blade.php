@@ -2,7 +2,7 @@
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>T</b>AF</span>
+      <span class="logo-mini"><b>inv</b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>{{ config('app.name') }}</b></span>
     </a>
@@ -19,8 +19,8 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset('image/user/'.auth()->user()->foto) }}" class="user-image img-profil"
-                            alt="User Image" style="object-fit: cover;">
-                        <span class="hidden-xs">{{ auth()->user()->name }}  - <span style="color:white"> sebagai Manager</span></span>
+                            alt="User Image">
+                        <span class="hidden-xs">{{ auth()->user()->name }}  - <span style="color:white"> sebagai {{ auth()->user()->level }}</span></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -30,7 +30,6 @@
 
                             <p>
                                 {{ auth()->user()->name }} - {{ auth()->user()->email }}
-                                <small>Member since Nov. 2012</small>
                             </p>
                         </li>
                         <!-- Menu Footer-->

@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Tambah Lokasi
+    Data Lokasi Barang
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Tambah Lokasi</li>
+    <li class="active">Tambah Data Lokasi Barang</li>
 @endsection
 
 @section('content')
@@ -22,9 +22,9 @@
         </div>
         @endif
           <!-- general form elements -->
-          <div class="box box-warning">
+          <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Tambah Lokasi</h3>
+              <h3 class="box-title">Tambah</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->

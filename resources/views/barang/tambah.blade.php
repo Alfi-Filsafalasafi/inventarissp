@@ -6,7 +6,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="active">Edit Data User</li>
+    <li class="active">Tambah Data Barang di Lokasi <b> {{$lokasis->nama}}</b></li>
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
         <!-- left column -->
         <div class="col-md-12">
           <!-- general form elements -->
-          <div class="box box-warning">
+          <div class="box box-success">
             <div class="box-header with-border">
               <h3 class="box-title">Tambah</h3>
             </div>
@@ -39,6 +39,17 @@
                             <span class="help-block">{{$message}}</span>
                             @enderror
                         </div>
+                        <div class="form-group @error('foto') has-error @enderror">
+                          <label for="exampleInputFile">Foto</label>
+                          <input type="file" name="foto" id="foto" value="{{old('foto')}}">
+                          @error('foto')
+                                    <span class="help-block">{{$message}}</span>
+                            @enderror
+                        </div>
+                <div class="form-group">
+                <img id="preview-image-before-upload" src="{{asset('image/404.png')}}"
+                      alt="preview image" style="max-height: 150px;">
+                </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group @error('kondisi') has-error @enderror">
@@ -62,20 +73,17 @@
                             <span class="help-block">{{$message}}</span>
                             @enderror
                         </div>
+                        <div class="form-group @error('date') has-error @enderror">
+                            <label for="exampleInputPassword1">Tanggal Masuk</label>
+                            <input type="date" name="date" value="{{old('date')}}" class="form-control" id="exampleInputPassword1" placeholder="Masukkan jumlah">
+                            @error('date')
+                            <span class="help-block">{{$message}}</span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
                   
-                <div class="form-group @error('foto') has-error @enderror">
-                  <label for="exampleInputFile">Foto</label>
-                  <input type="file" name="foto" id="foto" value="{{old('foto')}}">
-                  @error('foto')
-                            <span class="help-block">{{$message}}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                <img id="preview-image-before-upload" src="{{asset('image/404.png')}}"
-                      alt="preview image" style="max-height: 150px;">
-                </div>
+                
               </div>
               <!-- /.box-body -->
 

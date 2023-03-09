@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Peminjaman
+    Data Peminjaman
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Tambah Peminjaman</li>
+    <li class="active">Tambah Data Peminjaman</li>
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
         <!-- left column -->
         <div class="col-md-12">
           <!-- general form elements -->
-          <div class="box box-warning">
+          <div class="box box-success">
             <div class="box-header with-border">
               <h3 class="box-title">Tambah</h3>
             </div>

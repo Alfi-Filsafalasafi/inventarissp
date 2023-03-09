@@ -37,6 +37,7 @@ class BarangController extends Controller
             'kondisi' => 'required',
             'jumlah' => 'required',
             'jenis' => 'required|min:3',
+            'date' => 'required',
             'foto' => 'required|mimes:jpeg,jpg,png|max:1000',
         ]);
         
@@ -52,7 +53,7 @@ class BarangController extends Controller
         $barang->jumlah = $validateData['jumlah'];
         $barang->jenis = $validateData['jenis'];
         $barang->foto = $namaFile;
-        $barang->tgl_masuk = now();
+        $barang->tgl_masuk = $validateData['date'];
         $barang->id_lokasi = $lokasi->id;
         $barang->save();
 
@@ -71,8 +72,8 @@ class BarangController extends Controller
 
     }
 
-    public function edit(Barang $barang){
-        return view('barang.edit',['barang' => $barang]);
+    public function edit(Barang $barang, Lokasi $lokasi){
+        return view('barang.edit',['barang' => $barang, 'lokasi' => $lokasi]);
     }
 
     public function update(Request $request, Barang $barang)
@@ -84,6 +85,7 @@ class BarangController extends Controller
                 'spesifikasi' => 'required|min:3',
                 'kondisi' => 'required',
                 'jumlah' => 'required',
+                'date' => 'required',
                 'jenis' => 'required|min:3',
             ]);
             $barang = Barang::find($barang->id); 
@@ -91,6 +93,7 @@ class BarangController extends Controller
             $barang->nama = $validateData['nama'];
             $barang->spesifikasi = $validateData['spesifikasi'];
             $barang->kondisi = $validateData['kondisi'];
+            $barang->tgl_masuk = $validateData['date'];
             $barang->jumlah = $validateData['jumlah'];
             $barang->jenis = $validateData['jenis'];
             $barang->save();

@@ -21,7 +21,7 @@
                 <p>Lokasi</p>
             </div>
             <div class="icon">
-                <i class="fa fa-cube"></i>
+                <i class="fa fa-map-pin"></i>
             </div>
             <a href="{{route('lokasi.index')}}" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
         </div>
@@ -31,12 +31,12 @@
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3>{{$sudah}}</h3>
+                <h3>{{$sudah[0]->jumlah}}</h3>
 
                 <p>Peminjaman di kembalikan</p>
             </div>
             <div class="icon">
-                <i class="fa fa-cubes"></i>
+                <i class="fa fa-check-square"></i>
             </div>
             <a href="{{route('peminjaman.index')}}" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
         </div>
@@ -51,12 +51,29 @@
                 <p>Peminjaman belum di kembalikan</p>
             </div>
             <div class="icon">
-                <i class="fa fa-id-card"></i>
+                <i class="fa fa-spinner"></i>
             </div>
             <a href="{{route('peminjaman.index')}}" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->
+    
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-primary">
+            <div class="inner">
+                <h3>{{$total_transaksi[0]->jumlah}}</h3>
+
+                <p>Transaksi Peminjaman bulan ini</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-cart-arrow-down"></i>
+            </div>
+            <a href="{{route('peminjaman.index')}}" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    @if (auth()->user()->level == 'admin')
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-red">
@@ -66,26 +83,12 @@
                 <p>Pengguna</p>
             </div>
             <div class="icon">
-                <i class="fa fa-truck"></i>
+                <i class="fa fa-user"></i>
             </div>
             <a href="{{route('user.index')}}" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-red">
-            <div class="inner">
-                <h3>{{$total_transaksi}}</h3>
-
-                <p>Transaksi Peminjaman <small>bulan ini</small></p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-truck"></i>
-            </div>
-            <a href="{{route('peminjaman.index')}}" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!-- ./col -->
+    @endif
 </div>
 <!-- /.row -->
 <!-- Main row -->

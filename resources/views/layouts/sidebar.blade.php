@@ -5,7 +5,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('image/user/'.auth()->user()->foto)}}" class="img-circle" style="object-fit: cover; width:50px; height: 45px;" alt="User Image">
+                <img src="{{ asset('image/user/'.auth()->user()->foto)}}" class="img-circle" style="object-fit: cover;" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{{ auth()->user()->name }}</p>
@@ -16,21 +16,22 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">DASHBOARD</li>
             <li>
-                <a href="">
+                <a href="{{route('home')}}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
             <li class="header">MASTER</li>
             <li>
                 <a href="{{route('lokasi.index')}}">
-                    <i class="fa fa-money"></i> <span>Data Barang</span>
+                    <i class="fa fa-archive"></i> <span>Data Barang</span>
                 </a>
             </li>
             <li class="header">TRANSAKSI</li>
             <li>
                 <a href="{{route('peminjaman.index')}}">
-                    <i class="fa fa-money"></i> <span>Peminjaman</span>
+                    <i class="fa fa-cart-plus"></i> <span>Peminjaman</span>
                 </a>
             </li>
         
@@ -38,18 +39,18 @@
             @if (auth()->user()->level == 'admin')
             <li>
                 <a href="{{route('user.index')}}">
-                    <i class="fa fa-money"></i> <span>Data Pengguna</span>
+                    <i class="fa fa-users"></i> <span>Data Pengguna</span>
                 </a>
             </li>
             @endif
             <li>
                 <a href="{{route('pass.edit')}}">
-                    <i class="fa fa-money"></i> <span>Ganti Password</span>
+                    <i class="fa fa-lock"></i> <span>Ganti Password</span>
                 </a>
             </li>
             <li>
                 <a href="#" onclick="$('#logout-form').submit()">
-                    <i class="fa fa-money"></i> <span>Log Out</span>
+                    <i class="fa fa-sign-out"></i> <span>Log Out</span>
                 </a>
             </li>
             

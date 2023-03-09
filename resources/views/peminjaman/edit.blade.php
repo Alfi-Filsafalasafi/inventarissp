@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Peminjaman
+    Data Peminjaman
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Edit Peminjaman</li>
+    <li class="active">Edit Data Peminjaman</li>
 @endsection
 
 @section('content')

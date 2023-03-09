@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Daftar Peminjaman
+    Data Peminjaman
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Daftar Peminjaman <small></small></li>
+    <li class="active">Data Peminjaman <small></small></li>
 @endsection
 
 @section('content')
@@ -36,6 +36,7 @@
         <div class="box">
             <div class="box-header with-border">
                 <a href="{{route('peminjaman.create')}}" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</a>
+                <a href="{{route('peminjaman.cetak')}}" target="_blank" class="btn btn-info btn-xs btn-flat"><i class="fa fa-print"></i> Print</a>
             </div>
             <div class="box-body table-responsive">
             <table id="example1" class="table table-bordered table-hover">

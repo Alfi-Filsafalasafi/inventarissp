@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Daftar Barang di Lokasi <b> {{$lokasis->nama}}</b>
+    Data Barang di Lokasi <b> {{$lokasis->nama}}</b>
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Daftar Barang <b> {{$lokasis->nama}}</b></li>
+    <li class="active">Data Barang <b> {{$lokasis->nama}}</b></li>
 @endsection
 
 @section('content')
@@ -64,7 +64,7 @@
                         <td><img src="{{asset('/image/barang/'.$barang->foto)}}" alt="" srcset="" width="50"></td>
                         <td>
                         <div class="btn-group">
-                            <a href="{{route('barang.edit',['barang'=>$barang->id])}}" class="btn btn-warning btn-sm" style="margin: 2px;"><i class="fa fa-edit"></i></a>
+                            <a href="{{route('barang.edit',['barang'=>$barang->id, 'lokasi'=>$barang->id_lokasi])}}" class="btn btn-warning btn-sm" style="margin: 2px;"><i class="fa fa-edit"></i></a>
                             <a href="{{route('barang.delete',['barang'=>$barang->id])}}" class="btn btn-danger btn-sm" style="margin: 2px;"><i class="fa fa-trash"></i></a>
                         </div>
                         </td>

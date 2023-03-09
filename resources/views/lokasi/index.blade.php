@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Daftar Lokasi Barang
+    Data Lokasi Barang
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Daftar Lokasi Barang <small></small></li>
+    <li class="active">Data Lokasi Barang <small></small></li>
 @endsection
 
 @section('content')
@@ -41,7 +41,7 @@
     @forelse ($lokasis as $lokasi)
     <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <a href="{{route('barang.index',['lokasi'=>$lokasi->id])}}"><span class="info-box-icon bg-aqua "><i class="fa fa-envelope-o"></i></span></a>
+            <a href="{{route('barang.index',['lokasi'=>$lokasi->id])}}"><span class="info-box-icon bg-aqua "><i class="fa fa-inbox"></i></span></a>
 
             <div class="info-box-content">
               <span class="info-box-text">{{$lokasi->nama}}</span>

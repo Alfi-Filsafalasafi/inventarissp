@@ -6,7 +6,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="active">Edit Data User</li>
+    <li class="active">Tambah Data User</li>
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
         <!-- left column -->
         <div class="col-md-12">
           <!-- general form elements -->
-          <div class="box box-warning">
+          <div class="box box-success">
             <div class="box-header with-border">
               <h3 class="box-title">Tambah</h3>
             </div>
@@ -43,6 +43,17 @@
                                 Manajer</option>
                             </select>
                         </div>
+                        <div class="form-group @error('foto') has-error @enderror">
+                          <label for="exampleInputFile">Foto</label>
+                          <input type="file" name="foto" id="foto" value="{{old('foto')}}">
+                          @error('foto')
+                                    <span class="help-block">{{$message}}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                        <img id="preview-image-before-upload" src="{{asset('image/404.png')}}"
+                              alt="preview image" style="max-height: 150px;">
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group @error('email') has-error @enderror">
@@ -62,17 +73,7 @@
                     </div>
                 </div>
                   
-                <div class="form-group @error('foto') has-error @enderror">
-                  <label for="exampleInputFile">Foto</label>
-                  <input type="file" name="foto" id="foto" value="{{old('foto')}}">
-                  @error('foto')
-                            <span class="help-block">{{$message}}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                <img id="preview-image-before-upload" src="{{asset('image/404.png')}}"
-                      alt="preview image" style="max-height: 150px;">
-                </div>
+                
               </div>
               <!-- /.box-body -->
 
