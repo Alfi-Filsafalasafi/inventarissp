@@ -46,7 +46,8 @@
                         </div>
                         <div class="form-group @error('foto') has-error @enderror">
                           <label for="exampleInputFile">Foto</label>
-                          <input type="file" name="foto" id="foto" value="{{old('foto') }}">
+                          <input type="file" name="foto" id="foto" value="{{old('foto') }}" >
+                          <small>Kosongi jika tidak ingin merubah foto</small>
                           @error('foto')
                                     <span class="help-block">{{$message}}</span>
                             @enderror

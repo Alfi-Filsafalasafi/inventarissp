@@ -97,6 +97,7 @@
         </div>
       </div>
       <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script src="{{ asset('jquery.js') }}"></script>
  
 <script type="text/javascript">
       

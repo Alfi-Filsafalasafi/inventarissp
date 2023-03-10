@@ -14,7 +14,7 @@
     <div class="col-lg-12">
     @if(session()->has('tambah'))
     <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <button type="button" class="close" style="color-white" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h4><i class="icon fa fa-check"></i> Berhasil !</h4>
                 {{session()->get('tambah')}}
               </div>
@@ -65,7 +65,7 @@
                         <td>
                         <div class="btn-group">
                             <a href="{{route('barang.edit',['barang'=>$barang->id, 'lokasi'=>$barang->id_lokasi])}}" class="btn btn-warning btn-sm" style="margin: 2px;"><i class="fa fa-edit"></i></a>
-                            <a href="{{route('barang.delete',['barang'=>$barang->id])}}" class="btn btn-danger btn-sm" style="margin: 2px;"><i class="fa fa-trash"></i></a>
+                            <a href="{{route('barang.delete',['barang'=>$barang->id])}}" onclick="return confirm('Apakah Anda yakin menghapus data ini ?')" class="btn btn-danger btn-sm" style="margin: 2px;"><i class="fa fa-trash"></i></a>
                         </div>
                         </td>
                         </tr>

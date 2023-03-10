@@ -1,8 +1,18 @@
 @extends('layouts.auth')
 @section('login')
+
 <div class="login-box">
+@if(session()->has('error'))
+
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h4> Login Gagal !</h4>
+    <h5>{{session()->get('error')}}</h5>
+  </div>
+  @endif
   <div class="login-logo">
     <a href=""><b>InventarisSP</b></a>
+    
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

@@ -60,7 +60,8 @@
                         <td>
                         <div class="btn-group">
                             <a href="{{route('user.edit',['user'=>$user->id])}}" class="btn btn-warning btn-sm" style="margin: 2px;"><i class="fa fa-edit"></i></a>
-                            <a href="{{route('user.delete',['user'=>$user->id])}}" class="btn btn-danger btn-sm" style="margin: 2px;"><i class="fa fa-trash"></i></a>
+                            <a href="{{route('user.delete',['user'=>$user->id])}}" onclick="return confirm('Apakah Anda yakin menghapus data ini ?')" class="btn btn-danger btn-sm" style="margin: 2px;"
+                            {{ $user->email == auth()->user()->email ? 'disabled': '' }} ><i class="fa fa-trash"></i></a>
                         </div>
                         </td>
                         </tr>

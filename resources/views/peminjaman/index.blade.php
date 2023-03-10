@@ -52,7 +52,7 @@
                   <th>Kondisi</th>
                   <th>Status</th>
                   <th>Pemberi</th>
-                  <th><i class="fa fa-cog"></i></th>
+                  <th width="70"><i class="fa fa-cog"></i></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -77,7 +77,7 @@
                         <td>
                         <div class="btn-group">
                             <a href="{{route('peminjaman.edit',['peminjaman'=>$peminjaman->id])}}" class="btn btn-warning btn-sm" style="margin: 2px;"><i class="fa fa-edit"></i></a>
-                            <a href="{{route('peminjaman.delete',['peminjaman'=>$peminjaman->id])}}" class="btn btn-danger btn-sm" style="margin: 2px;"><i class="fa fa-trash"></i></a>
+                            <a href="{{route('peminjaman.delete',['peminjaman'=>$peminjaman->id])}}" onclick="return confirm('Apakah anda yakin menghapus data ini ?')" class="btn btn-danger btn-sm" style="margin: 2px;"><i class="fa fa-trash"></i></a>
                         </div>
                         </td>
                         </tr>

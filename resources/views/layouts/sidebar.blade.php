@@ -5,7 +5,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('image/user/'.auth()->user()->foto)}}" class="img-circle" style="object-fit: cover;" alt="User Image">
+                <img src="{{ asset('image/user/'.auth()->user()->foto)}}" class="user-image img-profil img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{{ auth()->user()->name }}</p>
@@ -39,7 +39,7 @@
             @if (auth()->user()->level == 'admin')
             <li>
                 <a href="{{route('user.index')}}">
-                    <i class="fa fa-users"></i> <span>Data Pengguna</span>
+                    <i class="fa fa-users"></i> <span>Data User</span>
                 </a>
             </li>
             @endif
