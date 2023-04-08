@@ -57,7 +57,7 @@
             <th>Spesifikasi</th>
             <th>Kondisi</th>
             <th>Jumlah</th>
-            <th width="110">Tanggal Masuk</th>
+            <th>Tanggal Masuk</th>
             <th>Foto</th>
           </tr>
           </thead>

@@ -49,8 +49,8 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                        <img id="preview-image-before-upload" src="{{asset('image/barang/'. $barang->foto)}}"
-                              alt="preview image" style="max-height: 150px;">
+                        <img id="preview-image-before-upload" src="{{ asset('image/barang/'. $barang->foto)}}"
+                              alt="Belum ada foto yang di upload" style="max-height: 150px;">
                         </div>
                     </div>
                     <div class="col-md-6">

@@ -90,31 +90,7 @@
                     <td colspan="6" class="text-center">Tidak ada data...</td>
                     </tr>
                     @endforelse
-                    @forelse ($peminjamans as $peminjaman)
-                    <tr>
-                        <th>{{$loop->iteration}}</th>
-                        <td>{{$peminjaman->nama_peminjam}}</td>
-                        <td>{{$peminjaman->nama_barang ?? 'Di hapus'}}</td>
-                        <td>{{$peminjaman->lokasi_barang ?? 'Di hapus'}}</td>
-                        <td>{{$peminjaman->jumlah}}</td>
-                        <td>{{$peminjaman->tgl_pinjam}}</td>
-                        <td>{{$peminjaman->tgl_kembali}}</td>
-                        <td>{{$peminjaman->kondisi}}</td>
-                        <td>
-                            @if($peminjaman->status == 'Di Kembalikan')
-                            <span class="label label-success">{{$peminjaman->status}}</span>
-                            @else
-                            <span class="label label-danger">{{$peminjaman->status}}</span>
-                            @endif
-                        </td>
-                        <td>{{$peminjaman->pemberi}}</td>
-                        
-                        
-                        
-                    @empty
-                    <td colspan="6" class="text-center">Tidak ada data...</td>
-                    </tr>
-                    @endforelse
+                    
 
         </tbody>
     </table>

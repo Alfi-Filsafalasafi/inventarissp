@@ -64,8 +64,12 @@
                         <td><img src="{{asset('/image/barang/'.$barang->foto)}}" alt="" srcset="" width="50"></td>
                         <td>
                         <div class="btn-group">
-                            <a href="{{route('barang.edit',['barang'=>$barang->id, 'lokasi'=>$barang->id_lokasi])}}" class="btn btn-warning btn-sm" style="margin: 2px;"><i class="fa fa-edit"></i></a>
-                            <a href="{{route('barang.delete',['barang'=>$barang->id])}}" onclick="return confirm('Apakah Anda yakin menghapus data ini ?')" class="btn btn-danger btn-sm" style="margin: 2px;"><i class="fa fa-trash"></i></a>
+                            <form method="POST" action="{{ route('barang.delete', $barang->id) }}">
+                                @csrf
+                                <input name="_method" type="hidden" value="DELETE">
+                                <a href="{{route('barang.edit',['barang'=>$barang->id, 'lokasi'=>$barang->id_lokasi])}}" class="btn btn-warning btn-sm" style="margin: 2px;"><i class="fa fa-edit"></i></a>
+                                <a href="{{route('barang.delete',['barang'=>$barang->id])}}" class="btn btn-danger btn-sm show_confirm" style="margin: 2px;"><i class="fa fa-trash"></i></a>
+                            </form>
                         </div>
                         </td>
                         </tr>
@@ -79,5 +83,32 @@
     </div>
 </div>
 @endsection
+
+@section('script_alert_confir')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script type="text/javascript">
+ 
+     $('.show_confirm').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          swal({
+              title: "Apakah anda yakin untuk menghapus data ini ?",
+              text: "",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            }
+          });
+      });
+  
+</script>
+@endsection
+
+
 
 

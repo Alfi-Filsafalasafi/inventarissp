@@ -38,13 +38,11 @@ class BarangController extends Controller
             'jumlah' => 'required',
             'jenis' => 'required|min:3',
             'date' => 'required',
-            'foto' => 'required|mimes:jpeg,jpg,png|max:1000',
+            // 'foto' => 'required|mimes:jpeg,jpg,png|max:1000',
+            'foto' => 'mimes:jpeg,jpg,png|max:1000',
         ]);
         
-        $extFile = $request->nama;
-        $extensi = $request->foto->getClientOriginalExtension();
-        $namaFile = $extFile."-".time().".".$extensi;
-        $path = $request->foto->move('image/barang',$namaFile);
+        
 
         $barang = new Barang();
         $barang->nama = $validateData['nama'];
@@ -52,7 +50,15 @@ class BarangController extends Controller
         $barang->kondisi = $validateData['kondisi'];
         $barang->jumlah = $validateData['jumlah'];
         $barang->jenis = $validateData['jenis'];
-        $barang->foto = $namaFile;
+        if($request->foto == '') {
+
+        }else {
+            $extFile = $request->nama;
+            $extensi = $request->foto->getClientOriginalExtension();
+            $namaFile = $extFile."-".time().".".$extensi;
+            $path = $request->foto->move('image/barang',$namaFile);
+            $barang->foto = $namaFile;
+        }
         $barang->tgl_masuk = $validateData['date'];
         $barang->id_lokasi = $lokasi->id;
         $barang->save();

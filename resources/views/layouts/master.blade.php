@@ -128,6 +128,7 @@
     })
   })
 </script>
+@yield('script_alert_confir')
 @stack('scripts')
 </body>
 </html>

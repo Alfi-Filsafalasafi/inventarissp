@@ -26,7 +26,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'nama' => 'required|min:3',
+            'nama' => 'required|regex:/^[a-zA-Z\s]+$/|min:3',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:3',
             'foto' => 'required|mimes:jpeg,jpg,png|max:1000',
@@ -67,8 +67,8 @@ class UserController extends Controller
 
         if($request->password == "" && $request->foto == ""){
             $validateData = $request->validate([
-                'nama' => 'required|min:3',
-                'email' => 'required|email|unique:users,email,'.$user->id,
+            'nama' => 'required|regex:/^[a-zA-Z\s]+$/|min:3',
+            'email' => 'required|email|unique:users,email,'.$user->id,
             ]);
             $user = User::find($user->id); 
             $user->name = $validateData['nama'];
@@ -78,8 +78,8 @@ class UserController extends Controller
         }else if($request->password == ""){
             
             $validateData = $request->validate([
-                'nama' => 'required|min:3',
-                'email' => 'required|email|unique:users,email,'.$user->id,
+            'nama' => 'required|regex:/^[a-zA-Z\s]+$/|min:3',
+            'email' => 'required|email|unique:users,email,'.$user->id,
             'foto' => 'required|mimes:jpeg,jpg,png|max:1000',
             ]);
 
@@ -99,7 +99,8 @@ class UserController extends Controller
             $user->save();
         } else if($request->foto == ""){
             $validateData = $request->validate([
-                'nama' => 'required|min:3',
+                'nama' => 'required|regex:/^[a-zA-Z\s]+$/|min:3',
+
                 'email' => 'required|email|unique:users,email,'.$user->id,
                 'password' => 'min:3',
             ]);
@@ -113,7 +114,7 @@ class UserController extends Controller
             $user->save();
         } else {
             $validateData = $request->validate([
-                'nama' => 'required|min:3',
+                'nama' => 'required|regex:/^[a-zA-Z\s]+$/|min:3',
                 'email' => 'required|email|unique:users,email,'.$user->id,
                 'foto' => 'required|mimes:jpeg,jpg,png|max:1000',
                 'password' => 'min:3',
