@@ -170,8 +170,18 @@ class PeminjamanController extends Controller
         
         
             $peminjamans = Peminjamans::find($id)->first();
+            $datenow = Carbon::now();
+            // dump($peminjamans->status);
+            if($peminjamans->status == "Di Pinjam"){
+                $peminjamans = Peminjamans::where('id',$id)
+                ->update(['status' => 'Di Kembalikan', 'tgl_kembali' => $datenow]); 
+            }
+            elseif($peminjamans->status == "Di Kembalikan"){
+                $peminjamans = Peminjamans::where('id',$id)
+                ->update(['status' => 'Di Pinjam', 'tgl_kembali' => '']); 
+            }
             return redirect()->route('peminjaman.index')
-            ->with('ubah',"Peminjaman barang untuk {$validateData['nama_peminjam']} berhasil status");
+            ->with('ubah',"berhasil status");
         
     }
 }

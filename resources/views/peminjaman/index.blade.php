@@ -69,11 +69,11 @@
                         <td>
                             @if($peminjaman->status == 'Di Kembalikan')
                             
-                            <a href="">
+                            <a href="{{route('peminjaman.statusUbah', ['id' => $peminjaman->id])}}">
                             <span class="label label-success">{{$peminjaman->status}}</span>
                             </a>
                             @else
-                           <a href="">
+                           <a href="{{route('peminjaman.statusUbah', ['id' => $peminjaman->id])}}">
                            <span class="label label-danger">{{$peminjaman->status}}</span>
                            </a>
                             @endif

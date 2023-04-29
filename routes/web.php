@@ -67,7 +67,7 @@ Route::get('/peminjaman/{peminjaman}/edit', [PeminjamanController::class, 'edit'
 Route::patch('/peminjaman/{peminjaman}', [PeminjamanController::class, 'update'])->name('peminjaman.update');
 Route::patch('/peminjaman/{kode_pinjam}/finalisasi', [PeminjamanController::class, 'finalisasi'])->name('peminjaman.finalisasi');
 
-Route::patch('/peminjaman/{id}/status', [PeminjamanController::class, 'statusUbah'])->name('peminjaman.statusUbah');
+Route::get('/peminjaman/{id}/status', [PeminjamanController::class, 'statusUbah'])->name('peminjaman.statusUbah');
 
 //ambil barang dari lokasi
 Route::get('/getbarang', [PeminjamanController::class, 'getBarang']);
