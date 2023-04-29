@@ -8,7 +8,7 @@
                 <img src="{{ asset('image/user/'.auth()->user()->foto)}}" class="user-image img-profil img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>{{ auth()->user()->name }}</p>
+                <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width:80%;">{{ auth()->user()->name }}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>

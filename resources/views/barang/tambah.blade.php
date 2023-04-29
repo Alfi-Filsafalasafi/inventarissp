@@ -32,10 +32,10 @@
                             <span class="help-block">{{$message}}</span>
                             @enderror
                         </div>
-                        <div class="form-group @error('spesifikasi') has-error @enderror">
-                          <label>Spesifikasi</label>
-                          <textarea name="spesifikasi" class="form-control" rows="5" placeholder="Masukkan spesifikasi">{{ old('spesifikasi')}}</textarea>
-                            @error('spesifikasi')
+                        <div class="form-group @error('tempat') has-error @enderror">
+                          <label>Tempat</label>
+                          <textarea name="tempat" class="form-control" rows="5" placeholder="Masukkan tempat">{{ old('tempat')}}</textarea>
+                            @error('tempat')
                             <span class="help-block">{{$message}}</span>
                             @enderror
                         </div>

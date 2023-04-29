@@ -56,12 +56,18 @@ Route::get('/barang/{lokasi}/cetak', [BarangController::class, 'cetak'])->name('
 //Data Peminjaman
 Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman.index');  
 Route::get('/peminjaman/cetak', [PeminjamanController::class, 'cetak'])->name('peminjaman.cetak');  
-Route::get('/peminjaman/tambah', [PeminjamanController::class, 'create'])->name('peminjaman.create');  
+Route::get('/peminjaman/tambah/{kode_pinjam}', [PeminjamanController::class, 'create'])->name('peminjaman.create');  
 Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');  
+Route::post('/peminjaman/barang/', [PeminjamanController::class, 'storebarang'])->name('peminjaman.storebarang');  
+Route::get('/peminjaman/dataPeminjaman', [PeminjamanController::class, 'storeDataPeminjam'])->name('peminjaman.storeDataPeminjam');  
 Route::delete('/peminjaman/{peminjaman}/hapus', [PeminjamanController::class, 'destroy'])->name('peminjaman.delete');
+Route::get('/peminjaman/{kode_pinjam}/batalpinjam', [PeminjamanController::class, 'batalPinjam'])->name('peminjaman.batal');
+Route::get('/peminjaman/{peminjaman}/hapus/barang/{kode_pinjam}', [PeminjamanController::class, 'destroybarangpinjam'])->name('peminjaman.deletebarangpinjam');
 Route::get('/peminjaman/{peminjaman}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
 Route::patch('/peminjaman/{peminjaman}', [PeminjamanController::class, 'update'])->name('peminjaman.update');
+Route::patch('/peminjaman/{kode_pinjam}/finalisasi', [PeminjamanController::class, 'finalisasi'])->name('peminjaman.finalisasi');
 
+Route::patch('/peminjaman/{id}/status', [PeminjamanController::class, 'statusUbah'])->name('peminjaman.statusUbah');
 
 //ambil barang dari lokasi
 Route::get('/getbarang', [PeminjamanController::class, 'getBarang']);

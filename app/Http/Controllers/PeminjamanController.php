@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Peminjamans;
+use Carbon\Carbon;
 
 
 class PeminjamanController extends Controller
@@ -23,10 +24,18 @@ class PeminjamanController extends Controller
         $peminjamans = DB::table('v_peminjaman')->get();
         return view('peminjaman.cetak', ['peminjamans' => $peminjamans]);
     }
-    public function create()
+    public function create($kode_pinjam)
     {
         $lokasi = DB::table('lokasis')->where('id', '!=', 0)->get();
-        return view('peminjaman.tambah', ['lokasis' => $lokasi]);
+        $datenow = Carbon::now();
+        $perpage = 3;
+        $barangdipinjam = DB::table('v_peminjaman')->where('kode_pinjam', $kode_pinjam)->get();
+        if($kode_pinjam == 0) {
+            $kode_pinjam = $datenow->format('YmdHis'); 
+        }else {
+
+        }// Mengubah format tanggal menjadi string YmdHis
+        return view('peminjaman.tambah', ['lokasis' => $lokasi,  'kode_pinjam' => $kode_pinjam, 'datenow' => $datenow, 'barangpinjam' => $barangdipinjam]);
     }
 
     public function getBarang(Request $request){
@@ -49,8 +58,6 @@ class PeminjamanController extends Controller
             'nama_peminjam' => 'required|min:3',
             'jumlah_pinjam' => 'required',
             'tgl_pinjam' => 'required',
-            'tgl_kembali' => 'required',
-            'kondisi' => 'required|min:3',
             'nama_pemberi' => 'required|min:3',
         ]);
             $peminjamans = Peminjamans::find($peminjaman->id); 
@@ -58,8 +65,9 @@ class PeminjamanController extends Controller
             $peminjamans->id_barang = $request->barang;
             $peminjamans->jumlah = $validateData['jumlah_pinjam'];
             $peminjamans->tgl_pinjam = $validateData['tgl_pinjam'];
-            $peminjamans->tgl_kembali = $validateData['tgl_kembali'];
-            $peminjamans->kondisi = $validateData['kondisi'];
+            if($request->tgl_kembali != ''){
+            $peminjamans->tgl_kembali = $request->tgl_kembali;
+            }
             $peminjamans->status = $request->status;
             $peminjamans->pemberi = $validateData['nama_pemberi'];
             $peminjamans->save();
@@ -73,31 +81,54 @@ class PeminjamanController extends Controller
         return response()->json($tersedia);
     }
 
-    public function store(Request $request)
+    public function storebarang(Request $request)
     {
         $validateData = $request->validate([
             'tersedia' => 'required',
-            'nama_peminjam' => 'required|min:3',
+            // 'nama_peminjam' => 'required|min:3',
             'jumlah_pinjam' => 'required',
-            'tgl_pinjam' => 'required',
-            'tgl_kembali' => 'required',
-            'kondisi' => 'required|min:3',
-            'nama_pemberi' => 'required|min:3',
+            // 'tgl_pinjam' => 'required',
+            // 'tgl_kembali' => 'required',
+            // 'kondisi' => 'required|min:3',
+            // 'nama_pemberi' => 'required|min:3',
         ]);
+        $datenow = Carbon::now();
+        $kode_pinjam = $request->kode_pinjam;
 
         $peminjaman = new Peminjamans();
-        $peminjaman->nama_peminjam = $validateData['nama_peminjam'];
+        // $peminjaman->nama_peminjam = $validateData['nama_peminjam'];
         $peminjaman->id_barang = $request->barang;
         $peminjaman->jumlah = $validateData['jumlah_pinjam'];
-        $peminjaman->tgl_pinjam = $validateData['tgl_pinjam'];
-        $peminjaman->tgl_kembali = $validateData['tgl_kembali'];
-        $peminjaman->kondisi = $validateData['kondisi'];
-        $peminjaman->status = $request->status;
-        $peminjaman->pemberi = $validateData['nama_pemberi'];
+        $peminjaman->kode_pinjam = $request->kode_pinjam;
         $peminjaman->save();
 
-        return redirect()->route('peminjaman.index')
-                ->with('tambah',"peminjaman barang kepada {$validateData['nama_peminjam']} berhasil");
+        $lokasi = DB::table('lokasis')->where('id', '!=', 0)->get();
+        $datenow = Carbon::now();
+        $barangdipinjam = DB::table('v_peminjaman')->where('kode_pinjam', $kode_pinjam)->get();
+        // $kode_pinjam = array_map('intval', $kode_pinjam);
+        if($kode_pinjam == 0) {
+            $kode_pinjam = $datenow->format('YmdHis'); 
+        }else {
+
+        }// Mengubah format tanggal menjadi string YmdHis
+        return redirect()->route('peminjaman.create', ['lokasis' => $lokasi,  'kode_pinjam' => $kode_pinjam, 'datenow' => $datenow, 'barangpinjam' => $barangdipinjam]);
+        
+    }
+
+    public function finalisasi(Request $request, $kode_pinjam)
+    {
+        
+        $validateData = $request->validate([
+            'nama_peminjam' => 'required|min:3',
+            'tgl_pinjam' => 'required',
+            'nama_pemberi' => 'required|min:3',
+        ]);
+            $peminjamans = Peminjamans::where('kode_pinjam',$kode_pinjam)
+            ->update(['nama_peminjam' => $validateData['nama_peminjam'], 'tgl_pinjam' => $validateData['tgl_pinjam'], 'pemberi' => $validateData['nama_pemberi'], 'status' => 'Di Pinjam']); 
+            
+            return redirect()->route('peminjaman.index')
+            ->with('ubah',"Peminjaman barang untuk {$validateData['nama_peminjam']} berhasil");
+        
     }
 
     public function destroy(Peminjamans $peminjaman){
@@ -106,5 +137,41 @@ class PeminjamanController extends Controller
         $peminjaman->delete();
         return redirect()->route('peminjaman.index')->with('hapus',"Peminjaman atas nama $peminjaman->nama_peminjam berhasil di hapus");
 
+    }
+
+    public function batalPinjam($kode_pinjam){
+
+        $peminjaman = Peminjamans::where('kode_pinjam',$kode_pinjam);
+        $peminjaman->delete();
+        return redirect()->route('peminjaman.index')->with('hapus',"Peminjaman Di Batalkan");
+
+    }
+
+    public function destroybarangpinjam(Peminjamans $peminjaman, $kode_pinjam){
+
+        $peminjaman = Peminjamans::where('id',$peminjaman->id)->first();
+        $peminjaman->delete();
+
+        $lokasi = DB::table('lokasis')->where('id', '!=', 0)->get();
+        $datenow = Carbon::now();
+        $barangdipinjam = DB::table('v_peminjaman')->where('kode_pinjam', $kode_pinjam)->get();
+        // $kode_pinjam = array_map('intval', $kode_pinjam);
+        if($kode_pinjam == 0) {
+            $kode_pinjam = $datenow->format('YmdHis'); 
+        }else {
+
+        }// Mengubah format tanggal menjadi string YmdHis
+        return redirect()->route('peminjaman.create', ['lokasis' => $lokasi,  'kode_pinjam' => $kode_pinjam, 'datenow' => $datenow, 'barangpinjam' => $barangdipinjam]);
+    }
+
+
+    public function statusUbah($id)
+    {
+        
+        
+            $peminjamans = Peminjamans::find($id)->first();
+            return redirect()->route('peminjaman.index')
+            ->with('ubah',"Peminjaman barang untuk {$validateData['nama_peminjam']} berhasil status");
+        
     }
 }

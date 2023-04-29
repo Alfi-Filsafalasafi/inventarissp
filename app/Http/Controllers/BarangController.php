@@ -33,7 +33,7 @@ class BarangController extends Controller
     {
         $validateData = $request->validate([
             'nama' => 'required|min:3',
-            'spesifikasi' => 'required|min:3',
+            'tempat' => 'required|min:3',
             'kondisi' => 'required',
             'jumlah' => 'required',
             'jenis' => 'required|min:3',
@@ -46,7 +46,7 @@ class BarangController extends Controller
 
         $barang = new Barang();
         $barang->nama = $validateData['nama'];
-        $barang->spesifikasi = $validateData['spesifikasi'];
+        $barang->tempat = $validateData['tempat'];
         $barang->kondisi = $validateData['kondisi'];
         $barang->jumlah = $validateData['jumlah'];
         $barang->jenis = $validateData['jenis'];
@@ -88,7 +88,7 @@ class BarangController extends Controller
         if($request->foto == ""){
             $validateData = $request->validate([
                 'nama' => 'required|min:3',
-                'spesifikasi' => 'required|min:3',
+                'tempat' => 'required|min:3',
                 'kondisi' => 'required',
                 'jumlah' => 'required',
                 'date' => 'required',
@@ -97,7 +97,7 @@ class BarangController extends Controller
             $barang = Barang::find($barang->id); 
             $lokasi = $barang->id_lokasi;
             $barang->nama = $validateData['nama'];
-            $barang->spesifikasi = $validateData['spesifikasi'];
+            $barang->tempat = $validateData['tempat'];
             $barang->kondisi = $validateData['kondisi'];
             $barang->tgl_masuk = $validateData['date'];
             $barang->jumlah = $validateData['jumlah'];
@@ -106,7 +106,7 @@ class BarangController extends Controller
         } else {
             $validateData = $request->validate([
                 'nama' => 'required|min:3',
-                'spesifikasi' => 'required|min:3',
+                'tempat' => 'required|min:3',
                 'kondisi' => 'required',
                 'jumlah' => 'required',
                 'jenis' => 'required|min:3',
@@ -124,7 +124,7 @@ class BarangController extends Controller
             $barang = Barang::find($barang->id); 
             $lokasi = $barang->id_lokasi;
             $barang->nama = $validateData['nama'];
-            $barang->spesifikasi = $validateData['spesifikasi'];
+            $barang->tempat = $validateData['tempat'];
             $barang->kondisi = $validateData['kondisi'];
             $barang->jumlah = $validateData['jumlah'];
             $barang->jenis = $validateData['jenis'];

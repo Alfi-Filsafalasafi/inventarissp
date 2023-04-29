@@ -35,7 +35,7 @@
     @endif
         <div class="box">
             <div class="box-header with-border">
-                <a href="{{route('peminjaman.create')}}" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</a>
+                <a href="{{route('peminjaman.create', ['kode_pinjam'=>'0']) }}" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</a>
                 <a href="{{route('peminjaman.cetak')}}" target="_blank" class="btn btn-info btn-xs btn-flat"><i class="fa fa-print"></i> Print</a>
             </div>
             <div class="box-body table-responsive">
@@ -46,10 +46,10 @@
                   <th>Nama Peminjaman</th>
                   <th>Barang</th>
                   <th>Lokasi</th>
+                  <th>Tempat</th>
                   <th>Jumlah</th>
                   <th>Tanggal Pinjam</th>
                   <th>Tanggal Kembali</th>
-                  <th>Kondisi</th>
                   <th>Status</th>
                   <th>Pemberi</th>
                   <th width="70"><i class="fa fa-cog"></i></th>
@@ -62,15 +62,20 @@
                         <td>{{$peminjaman->nama_peminjam}}</td>
                         <td>{{$peminjaman->nama_barang ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->lokasi_barang ?? 'Di hapus'}}</td>
+                        <td>{{$peminjaman->tempat ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->jumlah}}</td>
                         <td>{{$peminjaman->tgl_pinjam}}</td>
                         <td>{{$peminjaman->tgl_kembali}}</td>
-                        <td>{{$peminjaman->kondisi}}</td>
                         <td>
                             @if($peminjaman->status == 'Di Kembalikan')
+                            
+                            <a href="">
                             <span class="label label-success">{{$peminjaman->status}}</span>
+                            </a>
                             @else
-                            <span class="label label-danger">{{$peminjaman->status}}</span>
+                           <a href="">
+                           <span class="label label-danger">{{$peminjaman->status}}</span>
+                           </a>
                             @endif
                         </td>
                         <td>{{$peminjaman->pemberi}}</td>
