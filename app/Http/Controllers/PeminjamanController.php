@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Peminjamans;
+use App\Models\Barang;
 use Carbon\Carbon;
 
 
@@ -56,17 +57,42 @@ class PeminjamanController extends Controller
         $validateData = $request->validate([
             'tersedia' => 'required',
             'nama_peminjam' => 'required|min:3',
-            'jumlah_pinjam' => 'required',
             'tgl_pinjam' => 'required',
             'nama_pemberi' => 'required|min:3',
         ]);
             $peminjamans = Peminjamans::find($peminjaman->id); 
             $peminjamans->nama_peminjam = $validateData['nama_peminjam'];
             $peminjamans->id_barang = $request->barang;
-            $peminjamans->jumlah = $validateData['jumlah_pinjam'];
             $peminjamans->tgl_pinjam = $validateData['tgl_pinjam'];
-            if($request->tgl_kembali != ''){
             $peminjamans->tgl_kembali = $request->tgl_kembali;
+
+            $id_barang = $peminjamans->id_barang;
+                $databarang = DB::table('barangs')->where('id', $peminjamans->id_barang)->first();
+                $tersedia = $databarang->jumlah;
+                $jumlahpinjam = $peminjamans->jumlah;
+                // dump($tersedia, $jumlahpinjam, $stokakhir);
+
+
+            if($request->status=="Di Proses" && $peminjamans->status == "Di Pinjam"){
+                $stokakhir = $tersedia + $jumlahpinjam;
+                $barangs = Barang::where('id',$id_barang)
+                ->update(['jumlah' => $stokakhir]); 
+
+
+            } else if($peminjamans->status == "Di Pinjam" && $request->status == "Di Pinjam"){
+
+            } else if($request->status == "Di Pinjam"){
+                $stokakhir = $tersedia - $jumlahpinjam;
+                $barangs = Barang::where('id',$id_barang)
+                ->update(['jumlah' => $stokakhir]); 
+            }else if($peminjamans->status == "Di Kembalikan" && $request->status == "Di Kembalikan"){
+
+            }else if($peminjamans->status == "Di Proses" && $request->status == "Di Kembalikan"){
+
+            }else if($request->status == "Di Kembalikan") {
+                $stokakhir = $tersedia + $jumlahpinjam;
+                $barangs = Barang::where('id',$id_barang)
+                ->update(['jumlah' => $stokakhir]); 
             }
             $peminjamans->status = $request->status;
             $peminjamans->pemberi = $validateData['nama_pemberi'];
@@ -124,7 +150,7 @@ class PeminjamanController extends Controller
             'nama_pemberi' => 'required|min:3',
         ]);
             $peminjamans = Peminjamans::where('kode_pinjam',$kode_pinjam)
-            ->update(['nama_peminjam' => $validateData['nama_peminjam'], 'tgl_pinjam' => $validateData['tgl_pinjam'], 'pemberi' => $validateData['nama_pemberi'], 'status' => 'Di Pinjam']); 
+            ->update(['nama_peminjam' => $validateData['nama_peminjam'], 'tgl_pinjam' => $validateData['tgl_pinjam'], 'pemberi' => $validateData['nama_pemberi'], 'status' => 'Di Proses']); 
             
             return redirect()->route('peminjaman.index')
             ->with('ubah',"Peminjaman barang untuk {$validateData['nama_peminjam']} berhasil");
@@ -173,21 +199,37 @@ class PeminjamanController extends Controller
             $peminjamans = Peminjamans::find($id);
             $datenow = Carbon::now();
             // dump($peminjamans->status);
-            if($peminjamans->status == "Di Pinjam"){
+            if($peminjamans->status == "Di Proses"){
+                $id_barang = $peminjamans->id_barang;
+                $databarang = DB::table('barangs')->where('id', $peminjamans->id_barang)->first();
+                $tersedia = $databarang->jumlah;
+                $jumlahpinjam = $peminjamans->jumlah;
+                $stokakhir = $tersedia - $jumlahpinjam;
+                // dump($tersedia, $jumlahpinjam, $stokakhir);
+                $peminjamans = Peminjamans::where('id',$id)
+                ->update(['status' => 'Di Pinjam']); 
+
+                $barangs = Barang::where('id',$id_barang)
+                ->update(['jumlah' => $stokakhir]); 
+
+                $keterangan = DB::table('v_peminjaman')->where('id', $id)->first();
+                return redirect()->route('peminjaman.index')
+                ->with('info',"Peminjaman barang $keterangan->nama_barang oleh $keterangan->nama_peminjam berhasil di Pinjam");
+            }elseif($peminjamans->status == "Di Pinjam"){
+                $id_barang = $peminjamans->id_barang;
+                $databarang = DB::table('barangs')->where('id', $peminjamans->id_barang)->first();
+                $tersedia = $databarang->jumlah;
+                $jumlahpinjam = $peminjamans->jumlah;
+                $stokakhir = $tersedia + $jumlahpinjam;
                 $peminjamans = Peminjamans::where('id',$id)
                 ->update(['status' => 'Di Kembalikan', 'tgl_kembali' => $datenow]); 
+
+                $barangs = Barang::where('id',$id_barang)
+                ->update(['jumlah' => $stokakhir]); 
 
                 $keterangan = DB::table('v_peminjaman')->where('id', $id)->first();
                 return redirect()->route('peminjaman.index')
                 ->with('info',"Peminjaman barang $keterangan->nama_barang oleh $keterangan->nama_peminjam berhasil di kembalikan");
-            }
-            elseif($peminjamans->status == "Di Kembalikan"){
-                $peminjamans = Peminjamans::where('id',$id)
-                ->update(['status' => 'Di Pinjam', 'tgl_kembali' => '']); 
-
-                $keterangan = DB::table('v_peminjaman')->where('id', $id)->first();
-                return redirect()->route('peminjaman.index')
-                ->with('info',"Peminjaman barang $keterangan->nama_barang oleh $keterangan->nama_peminjam kembali di pinjam");
             }
             
         

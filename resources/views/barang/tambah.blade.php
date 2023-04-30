@@ -75,7 +75,7 @@
                         </div>
                         <div class="form-group @error('date') has-error @enderror">
                             <label for="exampleInputPassword1">Tanggal Masuk</label>
-                            <input type="date" name="date" value="{{old('date')}}" class="form-control" id="exampleInputPassword1" placeholder="Masukkan jumlah">
+                            <input type="date" name="date" value="{{ $datenow->format('Y-m-d')}}" class="form-control" id="exampleInputPassword1" placeholder="Masukkan jumlah">
                             @error('date')
                             <span class="help-block">{{$message}}</span>
                             @enderror

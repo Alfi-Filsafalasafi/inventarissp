@@ -78,8 +78,10 @@
                         <td>
                             @if($peminjaman->status == 'Di Kembalikan')
                             <span class="label label-success">{{$peminjaman->status}}</span>
-                            @else
+                            @elseif($peminjaman->status == 'Di Pinjam')
                             <span class="label label-danger">{{$peminjaman->status}}</span>
+                            @else($peminjaman->status == 'Di Proses')
+                            <span class="label label-warning">{{$peminjaman->status}}</span>
                             @endif
                         </td>
                         <td>{{$peminjaman->pemberi}}</td>

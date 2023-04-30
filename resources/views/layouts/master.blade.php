@@ -33,6 +33,8 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  
   @stack('css')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -115,6 +117,7 @@
 <script src="{{ asset('AdminLTE-2/dist/js/pages/dashboard2.js')}}"></script>
 <!-- Validator -->
 <script src="{{ asset('js/validator.min.js') }}"></script>
+
 <script>
   $(function () {
     $('#example1').DataTable()

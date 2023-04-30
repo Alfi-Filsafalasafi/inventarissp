@@ -74,13 +74,16 @@
                         <td>{{$peminjaman->tgl_pinjam}}</td>
                         <td>{{$peminjaman->tgl_kembali}}</td>
                         <td>
-                            @if($peminjaman->status == 'Di Kembalikan')
+                            @if($peminjaman->status == 'Di Proses')
                             
-                            <a href="{{route('peminjaman.statusUbah', ['id' => $peminjaman->id])}}">
-                            <span class="label label-success">{{$peminjaman->status}}</span>
+                            <a href="{{route('peminjaman.statusUbah', ['id' => $peminjaman->id])}}" onclick="return confirm('Apakah barang ini di pinjam?')">
+                            <span class="label label-warning">{{$peminjaman->status}}</span>
                             </a>
+                            @elseif($peminjaman->status == 'Di Kembalikan')
+                            
+                            <span class="label label-success">{{$peminjaman->status}}</span>
                             @else
-                                <a href="{{route('peminjaman.statusUbah', ['id' => $peminjaman->id])}}" id="dikembali" class="confirm_dikembalikan">
+                                <a href="{{route('peminjaman.statusUbah', ['id' => $peminjaman->id])}}" onclick="return confirm('Apakah barang ini di kembalikan?')" id="dikembali" class="confirm_dikembalikan">
                                     <span class="label label-danger">{{$peminjaman->status}}</span>
                                 </a>
                             @endif
@@ -110,7 +113,9 @@
 
 @section('script_alert_confir')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
 <script type="text/javascript">
+    
  
      $('.show_confirm').click(function(event) {
           var form =  $(this).closest("form");

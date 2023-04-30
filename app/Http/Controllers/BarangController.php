@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Lokasi;
 use App\Models\Barang;
+use Carbon\Carbon;
+
 
 use File;
 
@@ -27,7 +29,8 @@ class BarangController extends Controller
     }
     public function create(Lokasi $lokasi)
     {
-        return view('barang.tambah',['lokasis' => $lokasi]);
+        $datenow = Carbon::now();
+        return view('barang.tambah',['lokasis' => $lokasi, 'datenow' => $datenow]);
     }
     public function store(Request $request, Lokasi $lokasi)
     {

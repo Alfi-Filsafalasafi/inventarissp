@@ -31,7 +31,7 @@
                         <div class="col-md-6">
                           <div class="form-group @error('tersedia') has-error @enderror">
                             <label>Lokasi Barang</label>
-                            <select class="form-control" name="lokasi" id="lokasi">
+                            <select class="form-control theSelect" style="padding:100px;" name="lokasi" id="lokasi">
                             <option>---- Pilih Lokasi ----</option>
                               @foreach ($lokasis as $lokasi)
                                   <option value="{{ $lokasi->id }}">{{ $lokasi->nama }}</option>
@@ -44,17 +44,19 @@
                         <div class="col-md-6">
                           <div class="form-group @error('tersedia') has-error @enderror">
                               <label>Nama Barang</label>
-                              <select class="form-control" name="barang" id="barang">
+                              <select class="form-control theSelect" name="barang" id="barang">
                                 <option>---- Pilih Barang ----</option>
                               </select>
                           </div>
                         </div>
-                        <div class="col-md-6">
+                    </div>
+                    <div class="row">
+                    <div class="col-md-6">
                           <!-- foto -->
                             <div class="form-group">
                               <label for="">Foto Barang</label>  <br>
                             <img id="preview-image-before-upload" src="{{asset('image/404.png')}}"
-                                  alt="preview image" style="max-height: 109px;">
+                                  alt="preview image" style="width:100%;">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -161,7 +163,7 @@
                 </div>
             </div>
             <div class="box-footer">
-                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                <button type="submit" class="btn btn-primary pull-right" onclick="return confirm('Apakah sudah sesuai ? pastikan semuanya sesuai terutama jumlah barang yang di pinjam')">Submit</button>
                 <a href="{{route('peminjaman.batal',['kode_pinjam'=>$kode_pinjam])}}" class="btn btn-danger show_confirm pull-right" style="margin-right: 2px;">Batal Pinjam</a>
               </div>
           </form>
@@ -228,6 +230,13 @@
       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
     
  
+    <link rel="stylesheet" href="">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+<script>
+		$(".theSelect").select2();
+	</script>
 <script type="text/javascript">
       
 $(document).ready(function (e) {

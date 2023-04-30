@@ -28,7 +28,7 @@
                     <div class="col-md-6">
                     <div class="form-group @error('tersedia') has-error @enderror">
                       <label>Lokasi Barang</label>
-                      <select class="form-control" name="lokasi" id="lokasi">
+                      <select class="form-control" name="lokasi" id="lokasi" readonly>
                       <option>---- Pilih Lokasi ----</option>
                         @foreach ($lokasis as $lokasi)
                             <option value="{{ $lokasi->id }}" {{$lokasi->id == $peminjamans->id_lokasi ? 'selected':'' }}>{{ $lokasi->nama }}</option>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group @error('tersedia') has-error @enderror">
                       <label>Nama Barang </label> <small>*pilih kembali lokasi untuk mengubah barang</small> 
-                      <select class="form-control" name="barang" id="barang">
+                      <select class="form-control" name="barang" id="barang" readonly>
                         <option value="{{$peminjamans->id_barang}}" selected>{{$peminjamans->nama_barang}}</option>
                       </select>
                     </div>
@@ -48,15 +48,15 @@
                             <span class="help-block">Belum ada data, silahkan pilih lokasi dan nama barang terlebih dahulu</span>
                             @enderror
                         </div>
-                    <div class="form-group">
+                      <div class="form-group">
                           <label for="">Foto Barang</label> <br>
                           <img id="preview-image-before-upload" src="{{asset('image/barang/'. $peminjamans->foto_barang)}}"
                                 alt="preview image" style="max-height: 109px;">
                         </div>
-                        <div class="form-group @error('kondisi') has-error @enderror">
-                            <label for="">Kondisi</label>
-                            <input type="text" name="kondisi" id="kondisi" value="{{old('kondisi') ?? $peminjamans->kondisi}}" class="form-control">
-                            @error('kondisi')
+                        <div class="form-group @error('jumlah_pinjam') has-error @enderror">
+                            <label for="exampleInputPassword1">Jumlah Pinjam</label>
+                            <input type="number" name="jumlah_pinjam" value="{{old('jumlah_pinjam') ?? $peminjamans->jumlah}}" class="form-control" id="" placeholder="Masukkan jumlah pinjam" readonly>
+                            @error('jumlah_pinjam')
                             <span class="help-block">{{$message}}</span>
                             @enderror
                         </div>
@@ -69,13 +69,7 @@
                             <span class="help-block">{{$message}}</span>
                             @enderror
                         </div>
-                        <div class="form-group @error('jumlah_pinjam') has-error @enderror">
-                            <label for="exampleInputPassword1">Jumlah Pinjam</label>
-                            <input type="number" name="jumlah_pinjam" value="{{old('jumlah_pinjam') ?? $peminjamans->jumlah}}" class="form-control" id="" placeholder="Masukkan jumlah pinjam">
-                            @error('jumlah_pinjam')
-                            <span class="help-block">{{$message}}</span>
-                            @enderror
-                        </div>
+                        
                         <div class="form-group @error('tgl_pinjam') has-error @enderror">
                             <label for="">Tanggal Pinjam</label>
                             <input type="date" name="tgl_pinjam" value="{{old('tgl_pinjam') ?? $peminjamans->tgl_pinjam}}" class="form-control" id="">
@@ -93,6 +87,7 @@
                         <div class="form-group @error('status') has-error @enderror">
                           <label>Status</label>
                           <select class="form-control" name="status">
+                          <option value="Di Proses" {{ (old('status') ?? $peminjamans->status)== 'Di Proses' ? 'selected': '' }}>Di Proses</option>
                             <option value="Di Pinjam" {{ (old('status') ?? $peminjamans->status)== 'Di Pinjam' ? 'selected': '' }}>Di Pinjam</option>
                             <option value="Di Kembalikan" {{ (old('status') ?? $peminjamans->status)== 'Di Kembalikan' ? 'selected': '' }}>Di Kembalikan</option>
                           </select>
