@@ -134,8 +134,9 @@ class PeminjamanController extends Controller
     public function destroy(Peminjamans $peminjaman){
 
         $peminjaman = Peminjamans::where('id',$peminjaman->id)->first();
+        $keterangan = DB::table('v_peminjaman')->where('id',$peminjaman->id)->first();
         $peminjaman->delete();
-        return redirect()->route('peminjaman.index')->with('hapus',"Peminjaman atas nama $peminjaman->nama_peminjam berhasil di hapus");
+        return redirect()->route('peminjaman.index')->with('hapus',"Peminjaman barang $keterangan->nama_barang atas nama $peminjaman->nama_peminjam berhasil di hapus");
 
     }
 
@@ -169,19 +170,26 @@ class PeminjamanController extends Controller
     {
         
         
-            $peminjamans = Peminjamans::find($id)->first();
+            $peminjamans = Peminjamans::find($id);
             $datenow = Carbon::now();
             // dump($peminjamans->status);
             if($peminjamans->status == "Di Pinjam"){
                 $peminjamans = Peminjamans::where('id',$id)
                 ->update(['status' => 'Di Kembalikan', 'tgl_kembali' => $datenow]); 
+
+                $keterangan = DB::table('v_peminjaman')->where('id', $id)->first();
+                return redirect()->route('peminjaman.index')
+                ->with('info',"Peminjaman barang $keterangan->nama_barang oleh $keterangan->nama_peminjam berhasil di kembalikan");
             }
             elseif($peminjamans->status == "Di Kembalikan"){
                 $peminjamans = Peminjamans::where('id',$id)
                 ->update(['status' => 'Di Pinjam', 'tgl_kembali' => '']); 
+
+                $keterangan = DB::table('v_peminjaman')->where('id', $id)->first();
+                return redirect()->route('peminjaman.index')
+                ->with('info',"Peminjaman barang $keterangan->nama_barang oleh $keterangan->nama_peminjam kembali di pinjam");
             }
-            return redirect()->route('peminjaman.index')
-            ->with('ubah',"berhasil status");
+            
         
     }
 }

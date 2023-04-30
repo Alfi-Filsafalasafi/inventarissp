@@ -33,6 +33,13 @@
                 {{session()->get('hapus')}}
               </div>
     @endif
+    @if(session()->has('info'))
+    <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-check"></i> Berhasil !</h4>
+                {{session()->get('info')}}
+              </div>
+    @endif
         <div class="box">
             <div class="box-header with-border">
                 <a href="{{route('peminjaman.create', ['kode_pinjam'=>'0']) }}" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</a>
@@ -73,9 +80,9 @@
                             <span class="label label-success">{{$peminjaman->status}}</span>
                             </a>
                             @else
-                           <a href="{{route('peminjaman.statusUbah', ['id' => $peminjaman->id])}}">
-                           <span class="label label-danger">{{$peminjaman->status}}</span>
-                           </a>
+                                <a href="{{route('peminjaman.statusUbah', ['id' => $peminjaman->id])}}" id="dikembali" class="confirm_dikembalikan">
+                                    <span class="label label-danger">{{$peminjaman->status}}</span>
+                                </a>
                             @endif
                         </td>
                         <td>{{$peminjaman->pemberi}}</td>

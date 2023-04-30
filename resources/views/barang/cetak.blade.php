@@ -54,7 +54,7 @@
           <tr>
             <th>No</th>
             <th>Nama</th>
-            <th>Spesifikasi</th>
+            <th>Tempat</th>
             <th>Kondisi</th>
             <th>Jumlah</th>
             <th>Tanggal Masuk</th>
@@ -66,7 +66,7 @@
                     <tr>
                         <th>{{$loop->iteration}}</th>
                         <td>{{$barang->nama}}</td>
-                        <td>{{$barang->spesifikasi}}</td>
+                        <td>{{$barang->tempat}}</td>
                         <td>{{$barang->kondisi}}</td>
                         <td>{{$barang->jumlah}}</td>
                         <td>{{$barang->tgl_masuk}}</td>

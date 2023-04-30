@@ -56,10 +56,10 @@
             <th>Nama Peminjaman</th>
             <th>Barang</th>
             <th>Lokasi</th>
+            <th>Tempat</th>
             <th>QTY</th>
             <th>Tanggal Pinjam</th>
             <th>Tanggal Kembali</th>
-            <th>Kondisi</th>
             <th>Status</th>
             <th>Pemberi</th>
             </tr>
@@ -71,10 +71,10 @@
                         <td>{{$peminjaman->nama_peminjam}}</td>
                         <td>{{$peminjaman->nama_barang ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->lokasi_barang ?? 'Di hapus'}}</td>
+                        <td>{{$peminjaman->tempat ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->jumlah}}</td>
                         <td>{{$peminjaman->tgl_pinjam}}</td>
                         <td>{{$peminjaman->tgl_kembali}}</td>
-                        <td>{{$peminjaman->kondisi}}</td>
                         <td>
                             @if($peminjaman->status == 'Di Kembalikan')
                             <span class="label label-success">{{$peminjaman->status}}</span>
