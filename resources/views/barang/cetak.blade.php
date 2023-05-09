@@ -19,6 +19,10 @@
     @page {   /* auto is the initial value */
     margin: 20px;  /* this affects the margin in the printer settings */
 }
+.dt-buttons {
+  margin-bottom: 10px;
+  width:100%;
+}
 
 
   </style>
@@ -57,20 +61,22 @@
             <th>Tempat</th>
             <th>Kondisi</th>
             <th>Jumlah</th>
+            <th>Kebutuhan</th>
+            <th>Keterangan</th>
             <th>Tanggal Masuk</th>
-            <th>Foto</th>
           </tr>
           </thead>
           <tbody>
           @forelse ($barangs as $barang)
                     <tr>
-                        <th>{{$loop->iteration}}</th>
+                        <td></td>
                         <td>{{$barang->nama}}</td>
                         <td>{{$barang->tempat}}</td>
                         <td>{{$barang->kondisi}}</td>
-                        <td>{{$barang->jumlah}}</td>
+                        <td>{{$barang->total_barang}}</td>
+                        <td>{{$barang->kebutuhan}}</td>
+                        <td>{{$barang->total_barang - $barang->kebutuhan}}</td>
                         <td>{{$barang->tgl_masuk}}</td>
-                        <td><img src="{{asset('/image/barang/'.$barang->foto)}}" alt="" srcset="" width="100"></td>
                         </tr>
                     @empty
                     <td colspan="6" class="text-center">Tidak ada data...</td>
@@ -86,29 +92,78 @@
     <script src="{{asset('js/buttons.print.min.js')}}"></script>
     <script>
     $(document).ready(function() {
-    $('#example1').DataTable( {
-        dom: 'Bfrtip',
+    var table = $('#example1').DataTable({
+        dom: 'lrtipB',
+        columnDefs: [{
+            searchable: false,
+            orderable: false,
+            targets: 0
+        }],
+        order: [[1, 'asc']],
         buttons: [
             {
                 extend: 'print',
+                className: 'btn-primary',
                 customize: function ( win ) {
                     $(win.document.body)
                         .css( 'font-size', '12px' );
- 
+
                     $(win.document.body).find( 'table' )
                         .addClass( 'compact' )
                         .css( 'font-size', 'inherit' );
-                },
-                
-                exportOptions: {
-                        stripHtml : false,
-                        //specify which column you want to print
- 
-                    }
+                        var num = 1;
+                        // $(win.document.body).find('table thead').append('<th>No</th>');
+                        $(win.document.body).find('table tbody tr').each(function(index) {
+    $(this).find('td:first').text(index + 1);
+});
+
+
+                    // move the div containing the data count information to the bottom of the body
+                    var div = $('')
+                        .insertAfter($(win.document.body).find( 'table' ));
+
+                    // add CSS style to position the div at the bottom of the body
+                    div.css({
+                        'position': 'absolute',
+                        'bottom': 0,
+                        'left': 0,
+                        'right': 0,
+                        'text-align': 'left',
+                        'float' : 'left'
+                    });
+                }
             }
         ]
-    } );
-} );
+    });
+
+    var row_number = 1;
+
+    table.on('order.dt search.dt draw.dt', function () {
+        row_number = 1;
+        table.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+            cell.innerHTML = row_number++;
+        });
+    }).draw();
+
+    // add new column for searching all columns
+    table.columns().every(function () {
+        var column = this;
+        var header = $(column.header());
+        var title = header.text().trim();
+        if (title === "") {
+            title = "column-" + column.index();
+        }
+        $('<input class="form-control form-control-sm" type="text" placeholder="Search ' + title + '" style="width:100%" />').appendTo(header).on('keyup change clear', function () {
+            if (column.search() !== this.value) {
+                column.search(this.value).draw();
+            }
+        });
+    });
+
+    $('.dataTables_length', table.table().container()).parent().prepend(table.buttons().container());
+});
+
 </script>
+
 </body>
 </html>

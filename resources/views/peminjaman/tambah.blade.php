@@ -56,7 +56,7 @@
                             <div class="form-group">
                               <label for="">Foto Barang</label>  <br>
                             <img id="preview-image-before-upload" src="{{asset('image/404.png')}}"
-                                  alt="preview image" style="width:100%;">
+                                  alt="tidak ada foto" style="width:100%;">
                             </div>
                         </div>
                         <div class="col-md-6">

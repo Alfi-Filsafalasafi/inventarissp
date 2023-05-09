@@ -39,6 +39,7 @@ class BarangController extends Controller
             'tempat' => 'required|min:3',
             'kondisi' => 'required',
             'jumlah' => 'required',
+            'kebutuhan' => 'required',
             'jenis' => 'required|min:3',
             'date' => 'required',
             // 'foto' => 'required|mimes:jpeg,jpg,png|max:1000',
@@ -52,6 +53,8 @@ class BarangController extends Controller
         $barang->tempat = $validateData['tempat'];
         $barang->kondisi = $validateData['kondisi'];
         $barang->jumlah = $validateData['jumlah'];
+        $barang->total_barang = $validateData['jumlah'];
+        $barang->kebutuhan = $validateData['kebutuhan'];
         $barang->jenis = $validateData['jenis'];
         if($request->foto == '') {
 
@@ -87,6 +90,9 @@ class BarangController extends Controller
 
     public function update(Request $request, Barang $barang)
     {
+        
+
+        // dump($total_awal, $tersedia, $total_akhir, $hasil_tersedia);
 
         if($request->foto == ""){
             $validateData = $request->validate([
@@ -95,15 +101,31 @@ class BarangController extends Controller
                 'kondisi' => 'required',
                 'jumlah' => 'required',
                 'date' => 'required',
+                'kebutuhan' => 'required',
                 'jenis' => 'required|min:3',
             ]);
+
+            $barangnih = Barang::where('id',$barang->id)->first();
+            $total_awal = $barangnih->total_barang;
+            $tersedia = $barangnih->jumlah;
+            $total_akhir = $request->jumlah;
+
+            if($total_awal > $total_akhir) {
+                $selisih = $total_awal - $total_akhir;
+                $hasil_tersedia = $tersedia - $selisih;
+            }else {
+                $selisih = $total_akhir - $total_awal;
+                $hasil_tersedia = $tersedia + $selisih;
+            }
             $barang = Barang::find($barang->id); 
             $lokasi = $barang->id_lokasi;
             $barang->nama = $validateData['nama'];
             $barang->tempat = $validateData['tempat'];
             $barang->kondisi = $validateData['kondisi'];
             $barang->tgl_masuk = $validateData['date'];
-            $barang->jumlah = $validateData['jumlah'];
+            $barang->total_barang = $validateData['jumlah'];
+            $barang->kebutuhan = $validateData['kebutuhan'];
+            $barang->jumlah = $hasil_tersedia;
             $barang->jenis = $validateData['jenis'];
             $barang->save();
         } else {
@@ -112,9 +134,22 @@ class BarangController extends Controller
                 'tempat' => 'required|min:3',
                 'kondisi' => 'required',
                 'jumlah' => 'required',
+                'kebutuhan' => 'required',
                 'jenis' => 'required|min:3',
                 'foto' => 'required|mimes:jpeg,jpg,png|max:1000',
             ]);
+            $barangnih = Barang::where('id',$barang->id)->first();
+            $total_awal = $barangnih->total_barang;
+            $tersedia = $barangnih->jumlah;
+            $total_akhir = $request->jumlah;
+
+            if($total_awal > $total_akhir) {
+                $selisih = $total_awal - $total_akhir;
+                $hasil_tersedia = $tersedia - $selisih;
+            }else {
+                $selisih = $total_akhir - $total_awal;
+                $hasil_tersedia = $tersedia + $selisih;
+            }
 
             $gambar = Barang::where('id',$barang->id)->first();
             File::delete('image/barang/'.$gambar->foto);
@@ -129,7 +164,9 @@ class BarangController extends Controller
             $barang->nama = $validateData['nama'];
             $barang->tempat = $validateData['tempat'];
             $barang->kondisi = $validateData['kondisi'];
-            $barang->jumlah = $validateData['jumlah'];
+            $barang->total_barang = $validateData['jumlah'];
+            $barang->kebutuhan = $validateData['kebutuhan'];
+            $barang->jumlah = $hasil_tersedia;
             $barang->jenis = $validateData['jenis'];
             $barang->foto = $namaFile;
             $barang->save();

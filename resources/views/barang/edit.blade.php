@@ -70,8 +70,15 @@
                         </div>
                         <div class="form-group @error('jumlah') has-error @enderror">
                             <label for="exampleInputPassword1">Jumlah</label>
-                            <input type="number" name="jumlah" value="{{old('jumlah') ?? $barang->jumlah}}" class="form-control" id="exampleInputPassword1" placeholder="Masukkan jumlah">
+                            <input type="number" name="jumlah" value="{{old('jumlah') ?? $barang->total_barang}}" class="form-control" id="exampleInputPassword1" placeholder="Masukkan jumlah">
                             @error('jumlah')
+                            <span class="help-block">{{$message}}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group @error('kebutuhan') has-error @enderror">
+                            <label for="exampleInputPassword1">Kebutuhan</label>
+                            <input type="number" name="kebutuhan" value="{{old('kebutuhan') ?? $barang->kebutuhan}}" class="form-control" id="exampleInputPassword1" placeholder="Masukkan jumlah">
+                            @error('kebutuhan')
                             <span class="help-block">{{$message}}</span>
                             @enderror
                         </div>

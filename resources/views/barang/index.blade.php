@@ -47,21 +47,29 @@
                   <th>Tempat</th>
                   <th>Kondisi</th>
                   <th>Jumlah</th>
-                  <th>Tanggal Masuk</th>
+                  <th>Kebutuhan</th>
+                  <th>Keterangan</th>
                   <th>Foto</th>
+                  <th>Tanggal Masuk</th>
                   <th width="55"><i class="fa fa-cog"></i></th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse ($barangs as $barang)
                     <tr>
-                        <th>{{$loop->iteration}}</th>
+                        <!-- <th>{{$loop->iteration}}</th> -->
+                       <th>
+                       {{ ($loop->iteration - 1) + ((isset($_GET['page'])) ? ($_GET['page'] - 1) * $barangs->perPage() : 1) }}
+
+                       </th>
                         <td>{{$barang->nama}}</td>
                         <td>{{$barang->tempat}}</td>
                         <td>{{$barang->kondisi}}</td>
-                        <td>{{$barang->jumlah}}</td>
-                        <td>{{$barang->tgl_masuk}}</td>
+                        <td>{{$barang->total_barang}}</td>
+                        <td>{{$barang->kebutuhan }}</td>
+                        <td>{{$barang->total_barang - $barang->kebutuhan}}</td>
                         <td><img src="{{asset('/image/barang/'.$barang->foto)}}" alt="" srcset="" width="50"></td>
+                        <td>{{$barang->tgl_masuk}}</td>
                         <td>
                         <div class="btn-group">
                             <form method="POST" action="{{ route('barang.delete', $barang->id) }}">

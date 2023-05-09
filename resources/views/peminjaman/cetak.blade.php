@@ -20,6 +20,17 @@
     width: 100%;   /* auto is the initial value */
     margin: 20px;  /* this affects the margin in the printer settings */
 }
+.dt-buttons {
+  margin-bottom: 10px;
+  width:100%;
+}
+
+@media print {
+    table td:first-child {
+        display: table-cell !important;
+    }
+}
+
 
 
   </style>
@@ -42,7 +53,7 @@
         <div class="box">
             <div class="box-header with-border">
             <h3>
-              <i class="fa fa-globe"></i> InventarisSP - Data Barang
+              <i class="fa fa-globe"></i> InventarisSP - Data Peminjaman
               <br>
             </h3>
               <b>User pencetak : </b>{{ auth()->user()->name }} <br>
@@ -52,7 +63,7 @@
         <table id="example1" class="display" style="width:100%">
         <thead>
             <tr>
-            <th>No</th>
+                <th>No</th>
             <th>Nama Peminjaman</th>
             <th>Barang</th>
             <th>Lokasi</th>
@@ -65,9 +76,9 @@
             </tr>
         </thead>
         <tbody>
-        @forelse ($peminjamans as $peminjaman)
+        @forelse ($peminjamans as $index => $peminjaman)
                     <tr>
-                        <th>{{$loop->iteration}}</th>
+                        <td></td>
                         <td>{{$peminjaman->nama_peminjam}}</td>
                         <td>{{$peminjaman->nama_barang ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->lokasi_barang ?? 'Di hapus'}}</td>
@@ -103,8 +114,9 @@
     <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/dataTables.buttons.min.js')}}"></script>
     <script src="{{asset('js/buttons.print.min.js')}}"></script>
-    <script>
+    <!-- <script>
     $(document).ready(function() {
+        
     $('#example1').DataTable( {
         dom: 'Bfrtip',
         buttons: [
@@ -113,21 +125,110 @@
                 className: 'btn-primary',
                 customize: function ( win ) {
                     $(win.document.body)
-                        .css( 'font-size', '12px' )
-                        .prepend(
-                        );
- 
+                        .css( 'font-size', '12px' );
+
                     $(win.document.body).find( 'table' )
                         .addClass( 'compact' )
                         .css( 'font-size', 'inherit' );
-                    $(win.document.body).find( 'section' )
+
+                    // move the div containing the data count information to the bottom of the body
+                    var div = $('<div><b>Jumlah data: </b>'+ $('#example1').DataTable().rows().count() +'</div>')
+                        .insertAfter($(win.document.body).find( 'table' ));
+                    
+                    // add CSS style to position the div at the bottom of the body
+                    div.css({
+                        'position': 'absolute',
+                        'bottom': 0,
+                        'left': 0,
+                        'right': 0,
+                        'text-align': 'left',
+                        'float' : 'left'
+                    });
+                }
+
+            }
+        ],
+    } );
+    
+} );
+</script>  -->
+
+
+<script>
+    $(document).ready(function() {
+    var table = $('#example1').DataTable({
+        dom: 'lrtipB',
+        columnDefs: [{
+            searchable: false,
+            orderable: false,
+            targets: 0
+        }],
+        order: [[1, 'asc']],
+        buttons: [
+            {
+                extend: 'print',
+                className: 'btn-primary',
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '12px' );
+
+                    $(win.document.body).find( 'table' )
                         .addClass( 'compact' )
                         .css( 'font-size', 'inherit' );
+                        var num = 1;
+                        // $(win.document.body).find('table thead').append('<th>No</th>');
+                        $(win.document.body).find('table tbody tr').each(function(index) {
+    $(this).find('td:first').text(index + 1);
+});
+
+
+                    // move the div containing the data count information to the bottom of the body
+                    var div = $('')
+                        .insertAfter($(win.document.body).find( 'table' ));
+
+                    // add CSS style to position the div at the bottom of the body
+                    div.css({
+                        'position': 'absolute',
+                        'bottom': 0,
+                        'left': 0,
+                        'right': 0,
+                        'text-align': 'left',
+                        'float' : 'left'
+                    });
                 }
             }
         ]
-    } );
-} );
-</script> 
+    });
+
+    var row_number = 1;
+
+    table.on('order.dt search.dt draw.dt', function () {
+        row_number = 1;
+        table.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+            cell.innerHTML = row_number++;
+        });
+    }).draw();
+
+    // add new column for searching all columns
+    table.columns().every(function () {
+        var column = this;
+        var header = $(column.header());
+        var title = header.text().trim();
+        if (title === "") {
+            title = "column-" + column.index();
+        }
+        $('<input class="form-control form-control-sm" type="text" placeholder="Search ' + title + '" style="width:100%" />').appendTo(header).on('keyup change clear', function () {
+            if (column.search() !== this.value) {
+                column.search(this.value).draw();
+            }
+        });
+    });
+
+    $('.dataTables_length', table.table().container()).parent().prepend(table.buttons().container());
+});
+
+</script>
+
+
 </body>
 </html>
