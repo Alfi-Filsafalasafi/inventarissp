@@ -73,6 +73,7 @@
             <th>Tanggal Kembali</th>
             <th>Status</th>
             <th>Pemberi</th>
+            <th>Guru Pengampu</th>
             </tr>
         </thead>
         <tbody>
@@ -96,6 +97,7 @@
                             @endif
                         </td>
                         <td>{{$peminjaman->pemberi}}</td>
+                        <td>{{$peminjaman->guru_pengampu}}</td>
                         
                         
                         

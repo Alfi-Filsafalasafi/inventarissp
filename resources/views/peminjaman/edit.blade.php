@@ -95,6 +95,13 @@
                             <span class="help-block">{{$message}}</span>
                             @enderror
                         </div>
+                        <div class="form-group @error('guru_pengampu') has-error @enderror">
+                            <label for="guru_pengampu">Nama Guru Pengampu</label>
+                            <input name="guru_pengampu" value="{{old('guru_pengampu') ?? $peminjamans->guru_pengampu}}" class="form-control" id="guru_pengampu" placeholder="Masukkan nama guru pengampu">
+                            @error('guru_pengampu')
+                            <span class="help-block">{{$message}}</span>
+                            @enderror
+                        </div>
                         <div class="form-group @error('nama_pemberi') has-error @enderror">
                             <label for="nama_pemberi">Nama Pemberi Pinjaman</label>
                             <input name="nama_pemberi" value="{{old('nama_pemberi') ?? $peminjamans->pemberi}}" class="form-control" id="nama_pemberi" placeholder="Masukkan nama pemberi pinjaman">

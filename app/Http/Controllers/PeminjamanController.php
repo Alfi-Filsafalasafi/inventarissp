@@ -59,9 +59,11 @@ class PeminjamanController extends Controller
             'nama_peminjam' => 'required|min:3',
             'tgl_pinjam' => 'required',
             'nama_pemberi' => 'required|min:3',
+            'guru_pengampu' => 'required|min:3',
         ]);
             $peminjamans = Peminjamans::find($peminjaman->id); 
             $peminjamans->nama_peminjam = $validateData['nama_peminjam'];
+            $peminjamans->guru_pengampu = $validateData['guru_pengampu'];
             $peminjamans->id_barang = $request->barang;
             $peminjamans->tgl_pinjam = $validateData['tgl_pinjam'];
             $peminjamans->tgl_kembali = $request->tgl_kembali;
@@ -148,9 +150,10 @@ class PeminjamanController extends Controller
             'nama_peminjam' => 'required|min:3',
             'tgl_pinjam' => 'required',
             'nama_pemberi' => 'required|min:3',
+            'guru_pengampu' => 'required|min:3'
         ]);
             $peminjamans = Peminjamans::where('kode_pinjam',$kode_pinjam)
-            ->update(['nama_peminjam' => $validateData['nama_peminjam'], 'tgl_pinjam' => $validateData['tgl_pinjam'], 'pemberi' => $validateData['nama_pemberi'], 'status' => 'Di Proses']); 
+            ->update(['nama_peminjam' => $validateData['nama_peminjam'], 'guru_pengampu' => $validateData['guru_pengampu'], 'tgl_pinjam' => $validateData['tgl_pinjam'], 'pemberi' => $validateData['nama_pemberi'], 'status' => 'Di Proses']); 
             
             return redirect()->route('peminjaman.index')
             ->with('ubah',"Peminjaman barang untuk {$validateData['nama_peminjam']} berhasil");

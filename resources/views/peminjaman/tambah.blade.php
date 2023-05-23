@@ -131,7 +131,7 @@
             @csrf
             <div class="box-body">
                 <div class="row justify-content-between">
-                  <div class="col-md-5">
+                  <div class="col-md-3">
                     <div class="form-group @error('nama_peminjam') has-error @enderror">
                         <label for="nama_peminjam">Nama Peminjam</label>
                         <input name="nama_peminjam" value="{{old('nama_peminjam')}}" class="form-control" id="nama_peminjam" placeholder="Masukkan nama peminjam">
@@ -139,6 +139,16 @@
                         <span class="help-block">{{$message}}</span>
                         @enderror
                     </div>
+                  </div>
+                  <div class="col-md-3">
+                    <!-- Nama Pemberi -->
+                    <div class="form-group @error('guru_pengampu') has-error @enderror">
+                            <label for="nama_pemberi">Guru Pengampu</label>
+                            <input name="guru_pengampu" value="{{old('guru_pengampu')}}" class="form-control" id="guru_pengampu" placeholder="Masukkan nama guru pengampu">
+                            @error('guru_pengampu')
+                            <span class="help-block">{{$message}}</span>
+                            @enderror
+                        </div>
                   </div>
                   <div class="col-md-2">
                     <!-- tanggal pinjam -->
@@ -150,7 +160,7 @@
                       @enderror
                     </div>
                   </div>
-                  <div class="col-md-5">
+                  <div class="col-md-3">
                     <!-- Nama Pemberi -->
                     <div class="form-group @error('nama_pemberi') has-error @enderror">
                             <label for="nama_pemberi">Nama Pemberi Pinjaman</label>

@@ -59,6 +59,7 @@
                   <th>Tanggal Kembali</th>
                   <th>Status</th>
                   <th>Pemberi</th>
+                  <th>Guru Pengampu</th>
                   <th width="70"><i class="fa fa-cog"></i></th>
                 </tr>
                 </thead>
@@ -89,6 +90,7 @@
                             @endif
                         </td>
                         <td>{{$peminjaman->pemberi}}</td>
+                        <td>{{$peminjaman->guru_pengampu}}</td>
                         <td>
                         <div class="btn-group">
                             <form method="POST" action="{{ route('peminjaman.delete', $peminjaman->id) }}">
