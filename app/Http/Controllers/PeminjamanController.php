@@ -17,12 +17,12 @@ class PeminjamanController extends Controller
     }
     public function index()
     {
-        $peminjamans = DB::table('v_peminjaman')->get();
+        $peminjamans = DB::table('v_peminjaman')->orderByDesc('created_at')->get();
         return view('peminjaman.index', ['peminjamans' => $peminjamans]);
     }
     public function cetak()
     {
-        $peminjamans = DB::table('v_peminjaman')->get();
+        $peminjamans = DB::table('v_peminjaman')->orderBy('created_at', 'asc')->get();
         return view('peminjaman.cetak', ['peminjamans' => $peminjamans]);
     }
     public function create($kode_pinjam)

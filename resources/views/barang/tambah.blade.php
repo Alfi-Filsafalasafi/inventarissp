@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Data Barang di Lokasi  <b> {{$lokasis->nama}}</b>
+    Data Alat di Lokasi  <b> {{$lokasis->nama}}</b>
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Tambah Data Barang di Lokasi <b> {{$lokasis->nama}}</b></li>
+    <li class="active">Tambah Data Alat di Lokasi <b> {{$lokasis->nama}}</b></li>
 @endsection
 
 @section('content')

@@ -28,7 +28,7 @@
   </style>
   <title>
         <h3>
-          <i class="fa fa-globe"></i> InventarisSP - Data Barang
+          <i class="fa fa-globe"></i> InventarisSP - Data Alat
           <br>
         </h3>
         <div>
@@ -46,7 +46,7 @@
         <div class="box">
             <div class="box-header with-border">
             <h3>
-              <i class="fa fa-globe"></i> InventarisSP - Data Barang
+              <i class="fa fa-globe"></i> InventarisSP - Data Alat
               <br>
             </h3>
               <b>Lokasi  : </b>{{$lokasis->nama}}<br>

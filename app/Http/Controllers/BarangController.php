@@ -20,7 +20,10 @@ class BarangController extends Controller
     }
     public function index(Lokasi $lokasi)
     {
-        $barang = DB::select("SELECT * from barangs where id_lokasi = $lokasi->id"); 
+        $barang = DB::table('barangs')
+          ->where('id_lokasi', $lokasi->id)
+          ->orderByDesc('created_at')
+          ->get();
         return view('barang.index', ['barangs' => $barang, 'lokasis' => $lokasi]);
     }
     public function cetak(Lokasi $lokasi){

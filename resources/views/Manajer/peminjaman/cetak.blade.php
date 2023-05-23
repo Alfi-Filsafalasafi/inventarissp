@@ -65,7 +65,7 @@
             <tr>
                 <th>No</th>
             <th>Nama Peminjaman</th>
-            <th>Barang</th>
+            <th>Alat</th>
             <th>Lokasi</th>
             <th>Tempat</th>
             <th>QTY</th>
@@ -163,7 +163,6 @@
             orderable: false,
             targets: 0
         }],
-        order: [[1, 'asc']],
         buttons: [
             {
                 extend: 'print',

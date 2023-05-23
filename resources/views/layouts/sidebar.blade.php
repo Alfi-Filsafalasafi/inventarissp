@@ -25,13 +25,20 @@
             <li class="header">MASTER</li>
             <li>
                 <a href="{{route('lokasi.index')}}">
-                    <i class="fa fa-archive"></i> <span>Data Barang</span>
+                    <i class="fa fa-archive"></i> <span>Data Alat</span>
                 </a>
             </li>
             <li class="header">TRANSAKSI</li>
             <li>
                 <a href="{{route('peminjaman.index')}}">
                     <i class="fa fa-cart-plus"></i> <span>Peminjaman</span>
+                </a>
+            </li>
+
+            <li class="header">TAMBAHAN</li>
+            <li>
+                <a href="{{route('peminjaman.index')}}">
+                    <i class="fa fa-cart-plus"></i> <span>Data Barang</span>
                 </a>
             </li>
         

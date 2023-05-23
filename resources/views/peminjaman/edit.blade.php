@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-md-6">
                     <div class="form-group @error('tersedia') has-error @enderror">
-                      <label>Lokasi Barang</label>
+                      <label>Lokasi Alat</label>
                       <select class="form-control" name="lokasi" id="lokasi" readonly>
                       <option>---- Pilih Lokasi ----</option>
                         @foreach ($lokasis as $lokasi)
@@ -36,7 +36,7 @@
                       </select>
                     </div>
                     <div class="form-group @error('tersedia') has-error @enderror">
-                      <label>Nama Barang </label> <small>*pilih kembali lokasi untuk mengubah barang</small> 
+                      <label>Nama Alat </label> <small>*pilih kembali lokasi untuk mengubah alat</small> 
                       <select class="form-control" name="barang" id="barang" readonly>
                         <option value="{{$peminjamans->id_barang}}" selected>{{$peminjamans->nama_barang}}</option>
                       </select>
@@ -69,7 +69,13 @@
                             <span class="help-block">{{$message}}</span>
                             @enderror
                         </div>
-                        
+                        <div class="form-group @error('guru_pengampu') has-error @enderror">
+                            <label for="guru_pengampu">Nama Guru Pengampu</label>
+                            <input name="guru_pengampu" value="{{old('guru_pengampu') ?? $peminjamans->guru_pengampu}}" class="form-control" id="guru_pengampu" placeholder="Masukkan nama guru pengampu">
+                            @error('guru_pengampu')
+                            <span class="help-block">{{$message}}</span>
+                            @enderror
+                        </div>
                         <div class="form-group @error('tgl_pinjam') has-error @enderror">
                             <label for="">Tanggal Pinjam</label>
                             <input type="date" name="tgl_pinjam" value="{{old('tgl_pinjam') ?? $peminjamans->tgl_pinjam}}" class="form-control" id="">
@@ -92,13 +98,6 @@
                             <option value="Di Kembalikan" {{ (old('status') ?? $peminjamans->status)== 'Di Kembalikan' ? 'selected': '' }}>Di Kembalikan</option>
                           </select>
                           @error('status')
-                            <span class="help-block">{{$message}}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group @error('guru_pengampu') has-error @enderror">
-                            <label for="guru_pengampu">Nama Guru Pengampu</label>
-                            <input name="guru_pengampu" value="{{old('guru_pengampu') ?? $peminjamans->guru_pengampu}}" class="form-control" id="guru_pengampu" placeholder="Masukkan nama guru pengampu">
-                            @error('guru_pengampu')
                             <span class="help-block">{{$message}}</span>
                             @enderror
                         </div>

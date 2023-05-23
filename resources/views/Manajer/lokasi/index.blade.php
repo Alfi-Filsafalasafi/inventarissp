@@ -1,12 +1,12 @@
 @extends('manajer.layouts.master')
 
 @section('title')
-    Data Lokasi Barang
+    Data Lokasi Alat
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Data Lokasi Barang <small></small></li>
+    <li class="active">Data Lokasi Alat <small></small></li>
 @endsection
 
 @section('content')
@@ -42,7 +42,7 @@
 
             <div class="info-box-content">
                 <span class="info-box-text">{{$lokasi->nama}}</span>
-                <span class="info-box-number" name="jumlah" id="jumlah"> {{$lokasi->jumlah_barang}} <small>Model Barang</small></span>  
+                <span class="info-box-number" name="jumlah" id="jumlah"> {{$lokasi->jumlah_barang}} <small>Model Alat</small></span>  
             </div>
             <!-- /.info-box-content -->
           </div>

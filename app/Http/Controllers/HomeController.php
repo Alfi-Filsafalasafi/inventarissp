@@ -34,7 +34,9 @@ class HomeController extends Controller
         $user = User::count();
         $now = Carbon::now();
         $total_transaksi = DB::select("SELECT count(id) as jumlah from peminjamans WHERE MONTH(tgl_pinjam) = $now->month AND YEAR(tgl_pinjam) = $now->year");
-        $belum = Peminjamans::where('status', '=', "Di Pinjam")->count();
+        $belum = Peminjamans::where('status', 'Di Pinjam')
+                    ->orWhere('status', 'Di Proses')
+                    ->count();
         $sudah = DB::select("SELECT count(id) as jumlah from peminjamans WHERE MONTH(tgl_pinjam) = $now->month AND YEAR(tgl_pinjam) = $now->year AND status = 'Di Kembalikan'");
         // dump($sudah[0]->jumlah);
         return view('home', compact('user', 'lokasi', 'total_transaksi','belum','sudah'));

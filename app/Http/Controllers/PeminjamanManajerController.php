@@ -12,12 +12,12 @@ class PeminjamanManajerController extends Controller
 {
     public function index()
     {
-        $peminjamans = DB::table('v_peminjaman')->get();
+        $peminjamans = DB::table('v_peminjaman')->orderByDesc('created_at')->get();
         return view('manajer.peminjaman.index', ['peminjamans' => $peminjamans]);
     }
     public function cetak()
     {
-        $peminjamans = DB::table('v_peminjaman')->get();
+        $peminjamans = DB::table('v_peminjaman')->orderBy('created_at', 'asc')->get();
         return view('manajer.peminjaman.cetak', ['peminjamans' => $peminjamans]);
     }
     public function create($kode_pinjam)
@@ -85,9 +85,10 @@ class PeminjamanManajerController extends Controller
             'nama_peminjam' => 'required|min:3',
             'tgl_pinjam' => 'required',
             'nama_pemberi' => 'required|min:3',
+            'guru_pengampu' => 'required|min:3',
         ]);
             $peminjamans = Peminjamans::where('kode_pinjam',$kode_pinjam)
-            ->update(['nama_peminjam' => $validateData['nama_peminjam'], 'tgl_pinjam' => $validateData['tgl_pinjam'], 'pemberi' => $validateData['nama_pemberi'], 'status' => 'Di Proses']); 
+            ->update(['nama_peminjam' => $validateData['nama_peminjam'],'guru_pengampu' => $validateData['guru_pengampu'], 'tgl_pinjam' => $validateData['tgl_pinjam'], 'pemberi' => $validateData['nama_pemberi'], 'status' => 'Di Proses']); 
             
             return redirect()->route('peminjaman.index.manajer')
             ->with('ubah',"Peminjaman barang untuk {$validateData['nama_peminjam']} berhasil");

@@ -30,7 +30,7 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group @error('tersedia') has-error @enderror">
-                            <label>Lokasi Barang</label>
+                            <label>Lokasi Alat</label>
                             <select class="form-control theSelect" style="padding:100px;" name="lokasi" id="lokasi">
                             <option>---- Pilih Lokasi ----</option>
                               @foreach ($lokasis as $lokasi)
@@ -43,9 +43,9 @@
                         
                         <div class="col-md-6">
                           <div class="form-group @error('tersedia') has-error @enderror">
-                              <label>Nama Barang</label>
+                              <label>Nama Alat</label>
                               <select class="form-control theSelect" name="barang" id="barang">
-                                <option>---- Pilih Barang ----</option>
+                                <option>---- Pilih Alat ----</option>
                               </select>
                           </div>
                         </div>
@@ -54,7 +54,7 @@
                     <div class="col-md-6">
                           <!-- foto -->
                             <div class="form-group">
-                              <label for="">Foto Barang</label>  <br>
+                              <label for="">Foto Alat</label>  <br>
                             <img id="preview-image-before-upload" src="{{asset('image/404.png')}}"
                                   alt="tidak ada foto" style="width:100%;">
                             </div>
@@ -67,7 +67,7 @@
                                 <label for="exampleInputEmail1">Tersedia</label>
                                 <input type="text" name="tersedia" id="tersedia" class="form-control" readonly>
                                 @error('tersedia')
-                                <span class="help-block">Belum ada data, silahkan pilih lokasi dan nama barang terlebih dahulu</span>
+                                <span class="help-block">Belum ada data, silahkan pilih lokasi dan nama Alat terlebih dahulu</span>
                                 @enderror
                               </div>
                             </div>
@@ -96,7 +96,7 @@
                         <thead>
                         <tr>
                           <th>No</th>
-                          <th>Barang</th>
+                          <th>Alat</th>
                           <th>Lokasi</th>
                           <th>Jumlah Pinjam</th>
                           <th width="70"><i class="fa fa-cog"></i></th>
@@ -173,7 +173,7 @@
                 </div>
             </div>
             <div class="box-footer">
-                <button type="submit" class="btn btn-primary pull-right" onclick="return confirm('Apakah sudah sesuai ? pastikan semuanya sesuai terutama jumlah barang yang di pinjam')">Submit</button>
+                <button type="submit" class="btn btn-primary pull-right" onclick="return confirm('Apakah sudah sesuai ? pastikan semuanya sesuai terutama jumlah Alat yang di pinjam')">Submit</button>
                 <a href="{{route('peminjaman.batal',['kode_pinjam'=>$kode_pinjam])}}" class="btn btn-danger show_confirm pull-right" style="margin-right: 2px;">Batal Pinjam</a>
               </div>
           </form>
@@ -280,7 +280,7 @@ $(document).ready(function (e) {
            success:function(res){               
             if(res){
                 $("#barang").empty();
-                $("#barang").append('<option>--- Pilih Barang ---</option>');
+                $("#barang").append('<option>--- Pilih Alat ---</option>');
                 $.each(res,function(nama,id){
                     $("#barang").append('<option value="'+id+'">'+nama+'</option>');
                     

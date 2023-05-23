@@ -65,7 +65,8 @@
             <tr>
                 <th>No</th>
             <th>Nama Peminjaman</th>
-            <th>Barang</th>
+            <th>Guru Pengampu</th>
+            <th>Alat</th>
             <th>Lokasi</th>
             <th>Tempat</th>
             <th>QTY</th>
@@ -73,7 +74,6 @@
             <th>Tanggal Kembali</th>
             <th>Status</th>
             <th>Pemberi</th>
-            <th>Guru Pengampu</th>
             </tr>
         </thead>
         <tbody>
@@ -81,6 +81,7 @@
                     <tr>
                         <td></td>
                         <td>{{$peminjaman->nama_peminjam}}</td>
+                        <td>{{$peminjaman->guru_pengampu}}</td>
                         <td>{{$peminjaman->nama_barang ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->lokasi_barang ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->tempat ?? 'Di hapus'}}</td>
@@ -97,7 +98,6 @@
                             @endif
                         </td>
                         <td>{{$peminjaman->pemberi}}</td>
-                        <td>{{$peminjaman->guru_pengampu}}</td>
                         
                         
                         
@@ -120,7 +120,7 @@
     $(document).ready(function() {
         
     $('#example1').DataTable( {
-        dom: 'Bfrtip',
+        dom: 'Bfrtip',m 
         buttons: [
             {
                 extend: 'print',
@@ -165,7 +165,6 @@
             orderable: false,
             targets: 0
         }],
-        order: [[1, 'asc']],
         buttons: [
             {
                 extend: 'print',

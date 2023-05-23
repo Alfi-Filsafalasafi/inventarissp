@@ -118,48 +118,7 @@
 <!-- Validator -->
 <script src="{{ asset('js/validator.min.js') }}"></script>
 
-<script>
-  $(function () {
-    var table = $('#example1').DataTable({
-      'dom': 'lrtipB',
-        "columnDefs": [{
-            "searchable": false,
-            "orderable": false,
-            "targets": 0
-        }],
-        "order": [[1, 'asc']]
-    });
 
-    table.on('order.dt search.dt', function () {
-        table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-            cell.innerHTML = i + 1;
-        });
-    }).draw();
-
-    // add new column for searching all columns
-    table.columns().every(function () {
-        var column = this;
-        var header = $(column.header());
-        var title = header.text().trim();
-        if (title === "") {
-            title = "column-" + column.index();
-        }
-        $('<input class="form-control form-control-sm" type="text" placeholder="Search ' + title + '" style="width:100%" />').appendTo(header).on('keyup change clear', function () {
-            if (column.search() !== this.value) {
-                column.search(this.value).draw();
-            }
-        });
-    });
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    });
-  });
-</script>
 @yield('script_alert_confir')
 @stack('scripts')
 </body>

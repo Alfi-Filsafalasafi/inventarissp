@@ -127,7 +127,6 @@
             "orderable": false,
             "targets": 0
         }],
-        "order": [[1, 'asc']]
     });
 
     table.on('order.dt search.dt', function () {

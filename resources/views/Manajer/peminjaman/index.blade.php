@@ -51,7 +51,8 @@
                 <tr>
                   <th>No</th>
                   <th>Nama Peminjaman</th>
-                  <th>Barang</th>
+                  <th>Guru Pengampu</th>
+                  <th>Alat</th>
                   <th>Lokasi</th>
                   <th>Tempat</th>
                   <th>Jumlah</th>
@@ -66,6 +67,7 @@
                     <tr>
                         <th>{{$loop->iteration}}</th>
                         <td>{{$peminjaman->nama_peminjam}}</td>
+                        <td>{{$peminjaman->guru_pengampu ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->nama_barang ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->lokasi_barang ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->tempat ?? 'Di hapus'}}</td>

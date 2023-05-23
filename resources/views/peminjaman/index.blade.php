@@ -51,7 +51,8 @@
                 <tr>
                   <th>No</th>
                   <th>Nama Peminjaman</th>
-                  <th>Barang</th>
+                  <th>Guru Pengampu</th>
+                  <th>Alat</th>
                   <th>Lokasi</th>
                   <th>Tempat</th>
                   <th>Jumlah</th>
@@ -59,7 +60,6 @@
                   <th>Tanggal Kembali</th>
                   <th>Status</th>
                   <th>Pemberi</th>
-                  <th>Guru Pengampu</th>
                   <th width="70"><i class="fa fa-cog"></i></th>
                 </tr>
                 </thead>
@@ -68,6 +68,7 @@
                     <tr>
                         <th>{{$loop->iteration}}</th>
                         <td>{{$peminjaman->nama_peminjam}}</td>
+                        <td>{{$peminjaman->guru_pengampu}}</td>
                         <td>{{$peminjaman->nama_barang ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->lokasi_barang ?? 'Di hapus'}}</td>
                         <td>{{$peminjaman->tempat ?? 'Di hapus'}}</td>
@@ -77,20 +78,19 @@
                         <td>
                             @if($peminjaman->status == 'Di Proses')
                             
-                            <a href="{{route('peminjaman.statusUbah', ['id' => $peminjaman->id])}}" onclick="return confirm('Apakah barang ini di pinjam?')">
+                            <a href="{{route('peminjaman.statusUbah', ['id' => $peminjaman->id])}}" onclick="return confirm('Apakah Alat ini di pinjam?')">
                             <span class="label label-warning">{{$peminjaman->status}}</span>
                             </a>
                             @elseif($peminjaman->status == 'Di Kembalikan')
                             
                             <span class="label label-success">{{$peminjaman->status}}</span>
                             @else
-                                <a href="{{route('peminjaman.statusUbah', ['id' => $peminjaman->id])}}" onclick="return confirm('Apakah barang ini di kembalikan?')" id="dikembali" class="confirm_dikembalikan">
+                                <a href="{{route('peminjaman.statusUbah', ['id' => $peminjaman->id])}}" onclick="return confirm('Apakah Alat ini di kembalikan?')" id="dikembali" class="confirm_dikembalikan">
                                     <span class="label label-danger">{{$peminjaman->status}}</span>
                                 </a>
                             @endif
                         </td>
                         <td>{{$peminjaman->pemberi}}</td>
-                        <td>{{$peminjaman->guru_pengampu}}</td>
                         <td>
                         <div class="btn-group">
                             <form method="POST" action="{{ route('peminjaman.delete', $peminjaman->id) }}">
@@ -114,6 +114,47 @@
 @endsection
 
 @section('script_alert_confir')
+<script>
+  $(function () {
+    var table = $('#example1').DataTable({
+      'dom': 'lrtipB',
+        "columnDefs": [{
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        }],
+    });
+
+    table.on('order.dt search.dt', function () {
+        table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
+
+    // add new column for searching all columns
+    table.columns().every(function () {
+        var column = this;
+        var header = $(column.header());
+        var title = header.text().trim();
+        if (title === "") {
+            title = "column-" + column.index();
+        }
+        $('<input class="form-control form-control-sm" type="text" placeholder="Search ' + title + '" style="width:100%" />').appendTo(header).on('keyup change clear', function () {
+            if (column.search() !== this.value) {
+                column.search(this.value).draw();
+            }
+        });
+    });
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    });
+  });
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 
 <script type="text/javascript">

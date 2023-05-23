@@ -25,7 +25,7 @@
             <li class="header">MASTER</li>
             <li>
                 <a href="{{route('lokasi.index.manajer')}}">
-                    <i class="fa fa-archive"></i> <span>Data Barang</span>
+                    <i class="fa fa-archive"></i> <span>Data Alat</span>
                 </a>
             </li>
             <li class="header">TRANSAKSI</li>

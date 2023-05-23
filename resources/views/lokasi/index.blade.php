@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Data Lokasi Barang
+    Data Lokasi Alat
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Data Lokasi Barang <small></small></li>
+    <li class="active">Data Lokasi Alat <small></small></li>
 @endsection
 
 @section('content')
@@ -45,7 +45,7 @@
 
             <div class="info-box-content">
                 <span class="info-box-text">{{$lokasi->nama}}</span>
-                <span class="info-box-number" name="jumlah" id="jumlah"> {{$lokasi->jumlah_barang}} <small>Model Barang</small></span>
+                <span class="info-box-number" name="jumlah" id="jumlah"> {{$lokasi->jumlah_barang}} <small>Model Alat</small></span>
                 <span>
                     <form method="POST" action="{{ route('lokasi.delete', $lokasi->id) }}">
                         @csrf
@@ -77,7 +77,7 @@
           event.preventDefault();
           swal({
               title: "Apakah anda yakin untuk menghapus data ini ?",
-              text: "Data barang yang ada di lokasi ini juga akan terhapus.",
+              text: "Data Alat yang ada di lokasi ini juga akan terhapus.",
               icon: "warning",
               buttons: true,
               dangerMode: true,

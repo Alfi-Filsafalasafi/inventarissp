@@ -48,13 +48,13 @@ Route::get('/lokasi/{lokasi}/edit', [LokasiController::class, 'edit'])->name('lo
 Route::patch('/lokasi/{lokasi}', [LokasiController::class, 'update'])->name('lokasi.update');
 
 //Data Barang
-Route::get('/barang/{lokasi}/', [BarangController::class, 'index'])->name('barang.index'); 
-Route::get('/barang/{lokasi}/tambah', [BarangController::class, 'create'])->name('barang.create');  
-Route::post('/barang/{lokasi}', [BarangController::class, 'store'])->name('barang.store');  
-Route::delete('/barang/{barang}/hapus', [BarangController::class, 'destroy'])->name('barang.delete');
-Route::get('/barang/{barang}/edit/{lokasi}', [BarangController::class, 'edit'])->name('barang.edit');
-Route::patch('/barang/{barang}', [BarangController::class, 'update'])->name('barang.update');
-Route::get('/barang/{lokasi}/cetak', [BarangController::class, 'cetak'])->name('barang.cetak');
+Route::get('/alat/{lokasi}/', [BarangController::class, 'index'])->name('barang.index'); 
+Route::get('/alat/{lokasi}/tambah', [BarangController::class, 'create'])->name('barang.create');  
+Route::post('/alat/{lokasi}', [BarangController::class, 'store'])->name('barang.store');  
+Route::delete('/alat/{barang}/hapus', [BarangController::class, 'destroy'])->name('barang.delete');
+Route::get('/alat/{barang}/edit/{lokasi}', [BarangController::class, 'edit'])->name('barang.edit');
+Route::patch('/alat/{barang}', [BarangController::class, 'update'])->name('barang.update');
+Route::get('/alat/{lokasi}/cetak', [BarangController::class, 'cetak'])->name('barang.cetak');
 
 
 //Data Peminjaman
