@@ -1,6 +1,7 @@
 @extends('layouts.auth')
 @section('login')
 
+
 <div class="login-box">
 @if(session()->has('error'))
 
@@ -41,10 +42,12 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat" style="display: flex; justify-content: center;">Sign In</button>
         </div>
         <!-- /.col -->
       </div>
+      <p class="login-box-msg">atau</p>
+      <a href="{{route('home.manajer')}}" style="display: block; margin: 0 auto; text-align: center;">Masuk sebagai Manager</a>
     </form>
 
   </div>

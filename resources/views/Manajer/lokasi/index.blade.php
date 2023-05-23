@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('manajer.layouts.master')
 
 @section('title')
     Data Lokasi Barang
@@ -11,9 +11,6 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-12" style="margin-bottom :10px;">
-        <a href="{{route('lokasi.create')}}" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</a>
-    </div>
     <div class="col-lg-12">
         @if(session()->has('tambah'))
             <div class="alert alert-success alert-dismissible">
@@ -41,21 +38,11 @@
     @forelse ($lokasis as $lokasi)
     <div class="col-lg-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <a href="{{route('barang.index',['lokasi'=>$lokasi->id])}}"><span class="info-box-icon bg-aqua "><i class="fa fa-inbox"></i></span></a>
+            <a href="{{route('barang.index.manajer',['lokasi'=>$lokasi->id])}}"><span class="info-box-icon bg-aqua "><i class="fa fa-inbox"></i></span></a>
 
             <div class="info-box-content">
                 <span class="info-box-text">{{$lokasi->nama}}</span>
-                <span class="info-box-number" name="jumlah" id="jumlah"> {{$lokasi->jumlah_barang}} <small>Model Barang</small></span>
-                <span>
-                    <form method="POST" action="{{ route('lokasi.delete', $lokasi->id) }}">
-                        @csrf
-                        
-                         <input name="_method" type="hidden" value="DELETE">
-                            <a href="{{route('lokasi.edit',['lokasi'=>$lokasi->id])}}" class="btn btn-warning btn-sm" style="margin: 2px;"><i class="fa fa-edit"></i></a>
-                            <a href="{{route('lokasi.delete',['lokasi'=>$lokasi->id])}}" class="btn btn-danger btn-sm show_confirm" style="margin: 2px;"><i class="fa fa-trash"></i></a>
-                    </form>
-                </span>
-                
+                <span class="info-box-number" name="jumlah" id="jumlah"> {{$lokasi->jumlah_barang}} <small>Model Barang</small></span>  
             </div>
             <!-- /.info-box-content -->
           </div>

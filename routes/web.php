@@ -3,8 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LokasiController;
+use App\Http\Controllers\LokasiManajerController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\BarangManajerController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PeminjamanManajerController;
+use App\Http\Controllers\HomeManajerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,3 +83,29 @@ Route::get('/gettersedia', [PeminjamanController::class, 'getTersedia']);
 Route::get('/password', [UserController::class, 'passedit'])->name('pass.edit');
 Route::patch('/password', [UserController::class, 'passupdate'])->name('pass.update');
 
+
+
+//Manajer
+Route::get('/manajer', [HomeManajerController::class, 'index'])->name('home.manajer');
+
+
+//Data Lokasi
+Route::get('/manajer/lokasi', [LokasiManajerController::class, 'index'])->name('lokasi.index.manajer');
+
+//Data Barang
+Route::get('/manajer/barang/{lokasi}/', [BarangManajerController::class, 'index'])->name('barang.index.manajer'); 
+Route::get('/manajer/barang/{lokasi}/cetak', [BarangManajerController::class, 'cetak'])->name('barang.cetak.manajer');
+
+Route::get('/manajer/peminjaman', [PeminjamanManajerController::class, 'index'])->name('peminjaman.index.manajer');  
+Route::get('/manajer/peminjaman/cetak', [PeminjamanManajerController::class, 'cetak'])->name('peminjaman.cetak.manajer');  
+Route::get('/manajer/peminjaman/tambah/{kode_pinjam}', [PeminjamanManajerController::class, 'create'])->name('peminjaman.create.manajer');  
+Route::post('/manajer/peminjaman', [PeminjamanManajerController::class, 'store'])->name('peminjaman.store.manajer');  
+Route::post('/manajer/peminjaman/barang/', [PeminjamanManajerController::class, 'storebarang'])->name('peminjaman.storebarang.manajer');  
+Route::get('/manajer/peminjaman/dataPeminjaman', [PeminjamanManajerController::class, 'storeDataPeminjam'])->name('peminjaman.storeDataPeminjam.manajer');  
+Route::get('/manajer/peminjaman/{kode_pinjam}/batalpinjam', [PeminjamanManajerController::class, 'batalPinjam'])->name('peminjaman.batal.manajer');
+Route::get('/manajer/peminjaman/{peminjaman}/hapus/barang/{kode_pinjam}', [PeminjamanManajerController::class, 'destroybarangpinjam'])->name('peminjaman.deletebarangpinjam.manajer');
+Route::patch('/manajer/peminjaman/{kode_pinjam}/finalisasi', [PeminjamanManajerController::class, 'finalisasi'])->name('peminjaman.finalisasi.manajer');
+
+Route::get('/manajer/getbarang', [PeminjamanManajerController::class, 'getBarang']);
+Route::get('/manajer/gettersedia', [PeminjamanManajerController::class, 'getTersedia']);
+Route::get('/manajer/peminjaman/{id}/status', [PeminjamanManajerController::class, 'statusUbah'])->name('peminjaman.statusUbah.manajer');
