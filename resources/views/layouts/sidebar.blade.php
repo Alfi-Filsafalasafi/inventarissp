@@ -37,7 +37,7 @@
 
             <li class="header">TAMBAHAN</li>
             <li>
-                <a href="{{route('peminjaman.index')}}">
+                <a href="{{route('data.barang.index')}}">
                     <i class="fa fa-archive"></i> <span>Data Barang</span>
                 </a>
             </li>

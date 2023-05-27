@@ -5,6 +5,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\LokasiManajerController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\DataBarangController;
+use App\Http\Controllers\DataBarang2Controller;
+use App\Http\Controllers\DataBarangLastController;
 use App\Http\Controllers\BarangManajerController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PeminjamanManajerController;
@@ -77,6 +80,31 @@ Route::get('/peminjaman/{id}/status', [PeminjamanController::class, 'statusUbah'
 Route::get('/getbarang', [PeminjamanController::class, 'getBarang']);
 Route::get('/gettersedia', [PeminjamanController::class, 'getTersedia']);
 
+
+// Data Barang Tambahan
+Route::get('/barang/tambahan/', [DataBarangController::class, 'index'])->name('data.barang.index');
+Route::get('/barang/tambahan/tambah', [DataBarangController::class, 'create'])->name('data.barang.create');  
+Route::post('/barang/tambahan/tambah', [DataBarangController::class, 'store'])->name('data.barang.store');  
+Route::delete('/barang/tambahan/{data_barang}/hapus', [DataBarangController::class, 'destroy'])->name('data.barang.delete');
+Route::get('/barang/{data_barang}/edit/', [DataBarangController::class, 'edit'])->name('data.barang.edit');
+Route::patch('/barang/{data_barang}/update/', [DataBarangController::class, 'update'])->name('data.barang.update');
+
+//Data Barang Tambahan2
+Route::get('/barang2/tambahan/{data_barang1}/{nama}', [DataBarang2Controller::class, 'index'])->name('data2.barang.index');
+Route::get('/barang2/tambahan/{data_barang1}/{nama}/tambah', [DataBarang2Controller::class, 'create'])->name('data2.barang.create');  
+Route::post('/barang2/tambahan/{data_barang1}/{nama}/tambah', [DataBarang2Controller::class, 'store'])->name('data2.barang.store');  
+Route::delete('/barang2/tambahan/{data_barang}/{data_barang1}/{nama}/hapus', [DataBarang2Controller::class, 'destroy'])->name('data2.barang.delete');
+Route::get('/barang2/tambahan/{data_barang}/{data_barang1}/{nama}/edit', [DataBarang2Controller::class, 'edit'])->name('data2.barang.edit');
+Route::patch('/barang2/tambahan/{data_barang}/{data_barang1}/{nama}/update/', [DataBarang2Controller::class, 'update'])->name('data2.barang.update');
+
+//Data Barang Tambahan Last
+Route::get('/baranglast/tambahan/{data_barang2}/{nama}/{nama_barang2}', [DataBarangLastController::class, 'index'])->name('datalast.barang.index');
+Route::get('/baranglast/tambahan/{data_barang2}/{nama}/{nama_barang2}/tambah', [DataBarangLastController::class, 'create'])->name('datalast.barang.create'); 
+Route::post('/baranglast/tambahan/{data_barang2}/{nama}/{nama_barang2}/tambah', [DataBarangLastController::class, 'store'])->name('datalast.barang.store');  
+Route::get('/baranglast/tambahan/{data_barang2}/{nama}/{nama_barang2}/cetak', [DataBarangLastController::class, 'cetak'])->name('datalast.barang.cetak');
+Route::delete('/baranglast/tambahan/{data_barang2}/{nama}/{nama_barang2}/hapus/{data_baranglast}', [DataBarangLastController::class, 'destroy'])->name('datalast.barang.delete');
+Route::get('/baranglast/tambahan/{data_barang2}/{nama}/{nama_barang2}/edit/{data_baranglast}', [DataBarangLastController::class, 'edit'])->name('datalast.barang.edit');
+Route::patch('/baranglast/tambahan/{data_barang2}/{nama}/{nama_barang2}/update/{data_baranglast}', [DataBarangLastController::class, 'update'])->name('datalast.barang.update');
 
 
 //ganti pass

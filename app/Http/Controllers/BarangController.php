@@ -93,10 +93,7 @@ class BarangController extends Controller
 
     public function update(Request $request, Barang $barang)
     {
-        
-
-        // dump($total_awal, $tersedia, $total_akhir, $hasil_tersedia);
-
+ 
         if($request->foto == ""){
             $validateData = $request->validate([
                 'nama' => 'required|min:3',
